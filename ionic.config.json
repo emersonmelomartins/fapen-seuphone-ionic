@@ -1,0 +1,7 @@
+{
+  "name": "fapen-seuphone-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
