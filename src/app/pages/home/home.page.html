@@ -3,10 +3,47 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <a href="">
+      <img src="../../../assets/best_seller_bg.png" alt="Mais Vendidos">
+    </a>
+
+    <br />
+
+    <h3 style="text-align: left;">Conheça as novidades</h3>
+    <app-product-slide></app-product-slide>
+
+    <br />
+
+    <h3 style="text-align: left;">Nossos produtos</h3>
+    <ion-card>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <img src="../../../assets/iphone_2.png" />
+          </ion-col>
+          <ion-col>
+            <div>
+              <h3 style="font-size: 16px; font-weight: bold;">IPhone 11 XL</h3>
+            </div>
+            <div>
+              <p style="font-size: 12px;">Midnight Green - 128GB</p>
+            </div>
+            <div>
+              <p style="font-size: 12px;">R$ <span style="color: #2e4ea1">1999,00</span></p>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+
+            <ion-button color="success" expand="block">Ver Produto</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card>
+
   </div>
 </ion-content>
