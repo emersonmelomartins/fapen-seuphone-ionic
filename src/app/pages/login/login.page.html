@@ -3,17 +3,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div>
-    <ion-toolbar>
-      <ion-title>Default Title</ion-title>
-    </ion-toolbar>
-    <ion-item>
-      <ion-label position="stacked">Login</ion-label>
-      <ion-input placeholder="Digite seu Login."></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked" type="password">Senha</ion-label>
-      <ion-input placeholder="Digite sua Senha."></ion-input>
-    </ion-item>
+  <div class="form-container">
+    <form>
+        <ion-toolbar>
+          <ion-title class="form-title">Login</ion-title>
+        </ion-toolbar>
+        <ion-list lines="none">
+          <ion-label  class="form-label">Login</ion-label>
+          <ion-input placeholder="Digite seu Login." class="form-input" type="text"></ion-input>
+        </ion-list>
+        <ion-list lines="none">
+          <ion-label position="stacked" class="form-label">Senha</ion-label>
+          <ion-input placeholder="Digite sua Senha." class="form-input" type="password"></ion-input>
+        </ion-list>
+        <ion-list lines="none">
+          <a>Esqueci minha Senha</a>
+        </ion-list>
+        
+        <ion-button expand="block" color="success"> Login </ion-button>
+    </form>
   </div>
 </ion-content>
