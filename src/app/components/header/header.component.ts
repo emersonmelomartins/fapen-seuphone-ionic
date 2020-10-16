@@ -7,13 +7,18 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  @Input() title: any;
+  public isHidden = true;
 
-  constructor(private navCtrl: NavController) {
-    console.log(this.title);
+  constructor() {
    }
 
   ngOnInit() {}
 
-  public showTitle() { console.log(this.title); } 
+  handleSearchBar() {
+    if(this.isHidden === true ) {
+      this.isHidden = false;
+    } else {
+      this.isHidden = true;
+    }
+  } 
 }
