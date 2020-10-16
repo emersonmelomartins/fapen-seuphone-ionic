@@ -1,14 +1,23 @@
 <ion-app>
-  <ion-menu side="start" menuId="first" contentId="headerSideMenu" color="dark">
+  <ion-menu side="start" menuId="first" contentId="headerSideMenu">
       <ion-header color="dark">
         <ion-toolbar color="dark">
           <ion-title>Menu</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-content color="dark">
-        <ion-list *ngFor="let pages of navigate" color="dark">
+      <ion-content>
+
+        <ion-toolbar color="dark">
+          <ion-avatar style="margin: 10px auto;">
+            <img src="../assets/xicrinha.png">
+          </ion-avatar>
+          <p style="margin: 10px auto; text-align: center;">Olá, <b>Xicrinha</b>!</p>
+          <p style="margin: 10px auto; text-align: center;">xicrinha1234@seuphone.com.br</p>
+        </ion-toolbar>
+
+        <ion-list *ngFor="let pages of navigate">
         <ion-menu-toggle auto-hide="true">
-          <ion-item [routerLink]="pages.url" routerDirection="forward" color="dark">
+          <ion-item [routerLink]="pages.url" routerDirection="forward">
               <ion-icon [name]="pages.icon" size="small" slot="start"></ion-icon>
                  {{pages.title}} 
           </ion-item>

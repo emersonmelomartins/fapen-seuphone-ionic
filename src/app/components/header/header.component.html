@@ -2,7 +2,7 @@
   <ion-toolbar color="dark">
     <div
       style="
-        margin: 20px 0 -15px 0;
+        margin: 20px 0;
         padding: 0 30px;
         display: flex;
         align-items: center;
@@ -17,15 +17,15 @@
         <img width="80" src="../../assets/logo.png" />
       </div>
       <div>
-        <ion-button color="dark"
+        <ion-button color="dark" (click)="handleSearchBar()"
           ><img src="../../assets/search_icon.png"
         /></ion-button>
       </div>
+      
     </div>
   </ion-toolbar>
-  <ion-toolbar color="dark">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
+  <ion-toolbar [hidden]="isHidden" color="dark">
+    <ion-searchbar animated showCancelButton="always" placeholder="Buscar..." color="light">
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>

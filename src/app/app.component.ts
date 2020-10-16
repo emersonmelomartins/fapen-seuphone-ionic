@@ -42,6 +42,11 @@ export class AppComponent {
         url   : "/login",
         icon  : "person-outline"
       },
+      {
+        title : "Produtos",
+        url   : "/products",
+        icon  : "phone-portrait-outline"
+      },
     ]
   }
 }
