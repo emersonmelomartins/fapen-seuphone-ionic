@@ -4,23 +4,42 @@
 
 <ion-content [fullscreen]="true">
   <div class="form-container">
-    <form>
+    <form action="" [formGroup]="formGroup">
         <ion-toolbar>
           <ion-title class="form-title">Login</ion-title>
         </ion-toolbar>
         <ion-list lines="none">
-          <ion-label  class="form-label">Login</ion-label>
-          <ion-input placeholder="Digite seu Login." class="form-input" type="text"></ion-input>
-        </ion-list>
-        <ion-list lines="none">
-          <ion-label position="stacked" class="form-label">Senha</ion-label>
-          <ion-input placeholder="Digite sua Senha." class="form-input" type="password"></ion-input>
-        </ion-list>
-        <ion-list lines="none">
-          <a>Esqueci minha Senha</a>
+          <ion-label  class="form-label">Usuário</ion-label>
+          <ion-input formControlName="login" placeholder="Ex: joao123" class="form-input" type="text"></ion-input>
+          <div
+            *ngIf="!formGroup.controls.login.valid &&
+            formGroup.controls.login.dirty"
+            class="validator-error"
+          >
+            *Login obrigatório.
+          </div>
         </ion-list>
         
-        <ion-button expand="block" color="success"> Login </ion-button>
+        
+        <ion-list lines="none">
+          <ion-label position="stacked" class="form-label">Senha</ion-label>
+          <ion-input formControlName="password" placeholder="*******" class="form-input" type="password"></ion-input>
+          <div
+            *ngIf="!formGroup.controls.password.valid &&
+            formGroup.controls.password.dirty"
+            class="validator-error"
+          >
+            *Senha obrigatória.
+          </div>
+        </ion-list>
+        <ion-list lines="none">
+          <a href="#">+ Novo cadastro</a>
+          <br /><br />
+          <a href="#">Esqueci minha senha</a>
+          <br />
+        </ion-list>
+        
+        <ion-button [disabled]="!formGroup.valid" (click)="handleLogin()" expand="block" color="success"> ENTRAR </ion-button>
     </form>
   </div>
 </ion-content>
