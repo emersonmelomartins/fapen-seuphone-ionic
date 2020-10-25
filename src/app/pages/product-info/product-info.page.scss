@@ -42,21 +42,24 @@ ion-card {
 
 .product-subtitle {
   font-size: 14px;
+  text-transform: capitalize;
 }
 
 .product-subtitle-content {
   font-size: 14px;
   color: #767474;
   margin-bottom: 10px;
+  text-transform: capitalize;
 }
 
-.product-price {
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-  align-items: center;
+.product-price-simbol {
+  font-size: 14px;
+  color: #767474;
+  margin-right: 5px;
 }
 
 .product-price-content {
+  color: #2e4ea1;
   font-size: 24px;
+  font-weight: normal;
 }
