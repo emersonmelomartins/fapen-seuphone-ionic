@@ -52,6 +52,11 @@ export class AppComponent {
         url   : "/sign-up",
         icon  : "phone-portrait-outline"
       },
+      {
+        title : "Produto Especifico",
+        url   : "/product-info/1",
+        icon  : "phone-portrait-outline"
+      },
     ]
   }
 }

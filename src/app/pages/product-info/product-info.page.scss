@@ -1,0 +1,65 @@
+* {
+  font-family: "Poppins", "Arial", sans-serif;
+  color: #222;
+  box-sizing: border-box;
+}
+ion-card {
+  box-shadow: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+  margin: 0 20px;
+}
+
+.square-container {
+  display: flex;
+  flex: 1;
+}
+.square {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.green-square {
+  background-color: #1d3b20;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  border-radius: 10px;
+  display: block;
+}
+
+.product-title {
+  font-family: "Poppins-Bold", "Arial", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.product-subtitle {
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.product-subtitle-content {
+  font-size: 14px;
+  color: #767474;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+
+.product-price-simbol {
+  font-size: 14px;
+  color: #767474;
+  margin-right: 5px;
+}
+
+.product-price-content {
+  color: #2e4ea1;
+  font-size: 24px;
+  font-weight: normal;
+}
