@@ -4,20 +4,20 @@
 
 <ion-content>
   
-  <ion-card class="product-card">
+  <ion-card class="product-card" *ngFor="let product of products">
 
     <ion-grid>
       <ion-row>
         <ion-col>
-          <img src="../../../assets/iphone_1.png" width="90%" />
+          <img src={{imageBase64Code}} width="90%" />
         </ion-col>
         <ion-col>
           <div>
-            <h3 class="product-card-title">IPhone 11</h3>
+            <h3 class="product-card-title">{{product.modelo}}</h3>
           </div>
           <div>
-            <p class="product-card-text">Midnight Green - 128GB</p>
-            <p class="product-card-text"><sup>R$</sup> <span style="color: #2e4ea1; font-size: 18px;"> 1999,00</span></p>
+            <p class="product-card-text">{{product.descricao}}</p>
+            <p class="product-card-text"><sup>R$</sup> <span style="color: #2e4ea1; font-size: 18px;"> {{product.valor}}</span></p>
           </div>
         </ion-col>
       </ion-row>
