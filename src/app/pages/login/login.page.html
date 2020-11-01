@@ -10,10 +10,10 @@
         </ion-toolbar>
         <ion-list lines="none">
           <ion-label  class="form-label">Usuário</ion-label>
-          <ion-input formControlName="login" placeholder="Ex: joao123" class="form-input" type="text"></ion-input>
+          <ion-input [(ngModel)]="user.username" formControlName="username" placeholder="Ex: joao123" class="form-input" type="text"></ion-input>
           <div
-            *ngIf="!formGroup.controls.login.valid &&
-            formGroup.controls.login.dirty"
+            *ngIf="!formGroup.controls.username.valid &&
+            formGroup.controls.username.dirty"
             class="validator-error"
           >
             *Login obrigatório.
@@ -23,7 +23,7 @@
         
         <ion-list lines="none">
           <ion-label position="stacked" class="form-label">Senha</ion-label>
-          <ion-input formControlName="password" placeholder="*******" class="form-input" type="password"></ion-input>
+          <ion-input [(ngModel)]="user.password" formControlName="password" placeholder="*******" class="form-input" type="password"></ion-input>
           <div
             *ngIf="!formGroup.controls.password.valid &&
             formGroup.controls.password.dirty"
@@ -39,7 +39,7 @@
           <br />
         </ion-list>
         
-        <ion-button [disabled]="!formGroup.valid" (click)="handleLogin()" expand="block" color="success"> ENTRAR </ion-button>
+        <ion-button [disabled]="!formGroup.valid" (click)="doLogin()" expand="block" color="success"> ENTRAR </ion-button>
     </form>
   </div>
 </ion-content>

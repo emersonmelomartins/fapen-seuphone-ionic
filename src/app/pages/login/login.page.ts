@@ -1,5 +1,12 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NavController } from '@ionic/angular';
+import { UserAuthLogin } from 'src/app/models/User';
+import { AuthService } from 'src/app/services/auth.service';
+import { UsersService } from 'src/app/services/users.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -10,16 +17,16 @@ export class LoginPage implements OnInit {
 
   public formGroup: FormGroup;
 
-  public user = {
-    login: "",
-    password: "",
+  public user: UserAuthLogin = {
+    username: "",
+    password: ""
   }
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private usersService: UsersService, private authService: AuthService, private navCtrl: NavController) {
     
     this.formGroup = formBuilder.group({
-      login: [
-        this.user.login,
+      username: [
+        this.user.username,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
@@ -36,11 +43,18 @@ export class LoginPage implements OnInit {
 
    }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  doLogin() {
+    this.authService.authenticate(this.user)
+      .subscribe(data => {
+        this.authService.successfulLogin(data.body.jwtToken);
+        this.navCtrl.navigateRoot("home");
+      },
+      (error) => {
+        console.log("Ocorreu um Erro!", error);
+      });
   }
 
-  handleLogin() {
-    console.log(this.formGroup.value);
-  }
 
 }

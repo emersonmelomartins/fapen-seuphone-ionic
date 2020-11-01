@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-header',
@@ -7,18 +8,17 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  public isHidden = true;
+  
+  public isSearchBarHidden = true;
 
-  constructor() {
-   }
 
-  ngOnInit() {}
+  constructor(private storage: StorageService) {}
+
+  ngOnInit() {
+    console.log(this.storage.getLocalUser());
+  }
 
   handleSearchBar() {
-    if(this.isHidden === true ) {
-      this.isHidden = false;
-    } else {
-      this.isHidden = true;
-    }
+    this.isSearchBarHidden = !this.isSearchBarHidden;
   } 
 }
