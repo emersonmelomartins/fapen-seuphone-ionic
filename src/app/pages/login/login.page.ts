@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
     password: ""
   }
 
-  constructor(private formBuilder: FormBuilder, private usersService: UsersService, private authService: AuthService, private navCtrl: NavController) {
+  constructor(private formBuilder: FormBuilder, private usersService: UsersService, private authService: AuthService, private nav: NavController,) {
     
     this.formGroup = formBuilder.group({
       username: [
@@ -49,7 +49,8 @@ export class LoginPage implements OnInit {
     this.authService.authenticate(this.user)
       .subscribe(data => {
         this.authService.successfulLogin(data.body.jwtToken);
-        this.navCtrl.navigateRoot("home");
+        this.nav.navigateForward("home");
+        location.reload();
       },
       (error) => {
         console.log("Ocorreu um Erro!", error);

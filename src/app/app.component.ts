@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { StorageService } from './services/storage.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +14,20 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   navigate: any;
 
+  isLoggedIn: boolean;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private storage: StorageService,
+    private authService: AuthService,
+    public nav: NavController,
   ) {
     this.sideMenu();
     this.initializeApp();
+    this.isLoggedIn = storage.getLocalUser() !== null ? true : false;
+    console.log('app.component', this.isLoggedIn);
   }
 
   initializeApp() {
@@ -53,5 +62,11 @@ export class AppComponent {
         icon  : "phone-portrait-outline"
       },
     ]
+  }
+
+  logout() {
+    this.authService.logout();
+    this.nav.navigateForward("home");
+    location.reload();
   }
 }

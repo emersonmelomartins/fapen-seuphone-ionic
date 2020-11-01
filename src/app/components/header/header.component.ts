@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   constructor(private storage: StorageService) {}
 
   ngOnInit() {
-    console.log(this.storage.getLocalUser());
+    console.log('header.component', this.storage.getLocalUser());
   }
 
   handleSearchBar() {
