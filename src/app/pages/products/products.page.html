@@ -3,9 +3,20 @@
 </ion-header>
 
 <ion-content>
-  
-  <ion-card class="product-card" *ngFor="let product of products">
+  <ion-toolbar color="dark">
+    <ion-searchbar
+      (ionChange)="searchProducts($event)"
+      class="searchbar-input"
+      placeholder="Buscar..."
+      color="light"
+    >
+    </ion-searchbar>
+  </ion-toolbar>
 
+  <ion-card
+    class="product-card"
+    *ngFor="let product of products | searchFilter:inputValue"
+  >
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -17,17 +28,25 @@
           </div>
           <div>
             <p class="product-card-text">{{product.descricao}}</p>
-            <p class="product-card-text"><sup>R$</sup> <span style="color: #2e4ea1; font-size: 18px;"> {{product.valor}}</span></p>
+            <p class="product-card-text">
+              <sup>R$</sup>
+              <span style="color: #2e4ea1; font-size: 18px">
+                {{product.valor}}</span
+              >
+            </p>
           </div>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-button [routerLink]="['/product-info/' + product.idProduto]" color="success" expand="block">VER PRODUTO</ion-button>
+          <ion-button
+            [routerLink]="['/product-info/' + product.idProduto]"
+            color="success"
+            expand="block"
+            >VER PRODUTO</ion-button
+          >
         </ion-col>
       </ion-row>
     </ion-grid>
-
   </ion-card>
-
 </ion-content>

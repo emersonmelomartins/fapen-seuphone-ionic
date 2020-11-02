@@ -13,6 +13,8 @@ export class ProductsPage implements OnInit {
 
   public imageBase64Code: string;
 
+  public inputValue: string = "";
+
   constructor(private productsService: ProductsService) {
     this.getAllProducts();
   }
@@ -24,6 +26,10 @@ export class ProductsPage implements OnInit {
     this.productsService.getAllProduct().subscribe((data) => {
       this.products = data;
     })
+  }
+
+  searchProducts(event) {
+    this.inputValue = event.target.value;
   }
 
 }

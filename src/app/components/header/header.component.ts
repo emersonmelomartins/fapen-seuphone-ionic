@@ -9,16 +9,25 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class HeaderComponent implements OnInit {
   
-  public isSearchBarHidden = true;
+  //public isSearchBarHidden = true;
+
+  //public inputValue: string = "";
 
 
-  constructor(private storage: StorageService) {}
+  constructor(private storage: StorageService, private nav: NavController) {}
 
   ngOnInit() {
-    console.log('header.component', this.storage.getLocalUser());
+    
   }
 
   handleSearchBar() {
-    this.isSearchBarHidden = !this.isSearchBarHidden;
-  } 
+    //this.isSearchBarHidden = !this.isSearchBarHidden;
+    this.nav.navigateRoot("products");
+  }
+
+  /*
+  searchProducts(event) {
+    this.inputValue = event.target.value;
+  }
+  */
 }
