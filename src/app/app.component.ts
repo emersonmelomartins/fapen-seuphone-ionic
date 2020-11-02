@@ -55,6 +55,11 @@ export class AppComponent {
         url   : "/products",
         icon  : "phone-portrait-outline"
       },
+      {
+        title : "Carrinho",
+        url   : "/product-cart",
+        icon  : "cart-outline"
+      },
     ]
   }
 
