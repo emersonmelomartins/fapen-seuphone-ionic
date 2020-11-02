@@ -6,33 +6,33 @@
   <div id="container">
     
     <ion-card>
-      <div style="text-align: center; margin: 20px auto 0 auto;">
-        <img src="../../../assets/iphone_1.png" width="120px" alt="Smartphone">
+      <div style="text-align: center;">
+        <img src="{{product.fotoEmString}}" width="120px" />
       </div>
       <ion-card-header>
-        <ion-card-title class="product-title">iPhone 11 Pro</ion-card-title>
+        <ion-card-title class="product-title">{{product.modelo}}</ion-card-title>
         
         <ion-card-subtitle class="product-subtitle">Descrição</ion-card-subtitle>
-        <ion-card-subtitle class="product-subtitle-content">Iphone 11 Pro - Midnight Green - 128GB</ion-card-subtitle>
+        <ion-card-subtitle class="product-subtitle-content">{{product.descricao}}</ion-card-subtitle>
 
         <ion-card-subtitle class="product-subtitle">Cor</ion-card-subtitle>
         <ion-card-subtitle>
           <div class="square-container">
             <div class="square green-square"></div>
-            <p class="product-subtitle-content">Midnight Green</p>
+            <p class="product-subtitle-content">{{product.cor}}</p>
           </div>
         </ion-card-subtitle>
 
         <ion-card-subtitle class="product-subtitle">Modelo</ion-card-subtitle>
-        <ion-card-subtitle class="product-subtitle-content">Iphone 11 Pro</ion-card-subtitle>
+        <ion-card-subtitle class="product-subtitle-content">{{product.modelo}}</ion-card-subtitle>
 
         <ion-card-subtitle class="product-subtitle">Capacidade</ion-card-subtitle>
-        <ion-card-subtitle class="product-subtitle-content">128GB</ion-card-subtitle>
+        <ion-card-subtitle class="product-subtitle-content">(Sem retorno da api)</ion-card-subtitle>
         
         <ion-card-subtitle class="product-subtitle">Preço</ion-card-subtitle>
         <ion-card-subtitle class="product-subtitle-content">
           <sup class="product-price-simbol">R$</sup>
-          <span class="product-price-content">1999,00</span>
+          <span class="product-price-content">{{product.valor}}</span>
         </ion-card-subtitle>
 
       </ion-card-header>

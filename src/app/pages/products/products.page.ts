@@ -21,9 +21,8 @@ export class ProductsPage implements OnInit {
   }
 
   getAllProducts() {
-    this.productsService.getAllProduct().subscribe((resp) => {
-      this.products = resp;
-      this.imageBase64Code = `data:image/png;base64, ${resp.fotoEmString}`;
+    this.productsService.getAllProduct().subscribe((data) => {
+      this.products = data;
     })
   }
 
