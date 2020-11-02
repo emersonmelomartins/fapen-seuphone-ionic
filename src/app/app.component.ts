@@ -15,6 +15,7 @@ export class AppComponent {
   navigate: any;
 
   isLoggedIn: boolean;
+  userLogin: string;
 
   constructor(
     private platform: Platform,
@@ -26,8 +27,11 @@ export class AppComponent {
   ) {
     this.sideMenu();
     this.initializeApp();
-    this.isLoggedIn = storage.getLocalUser() !== null ? true : false;
-    console.log('app.component', this.isLoggedIn);
+
+    if(storage.getLocalUser() !== null) {
+      this.isLoggedIn = true;
+      this.userLogin = storage.getLocalUser().login;
+    }
   }
 
   initializeApp() {
@@ -47,18 +51,8 @@ export class AppComponent {
         icon  : "home"
       },
       {
-        title : "Login",
-        url   : "/login",
-        icon  : "person-outline"
-      },
-      {
         title : "Produtos",
         url   : "/products",
-        icon  : "phone-portrait-outline"
-      },
-      {
-        title : "Produto Especifico",
-        url   : "/product-info/1",
         icon  : "phone-portrait-outline"
       },
     ]

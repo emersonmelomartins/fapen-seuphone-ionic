@@ -5,8 +5,8 @@
 <ion-content [fullscreen]="true">
   <div id="container">
     
-    <ion-card>
-      <div style="text-align: center;">
+    <ion-card *ngIf="product !== undefined && product !== '' && product !== null">
+      <div style="text-align: center; margin-top: 20px;">
         <img src="{{product.fotoEmString}}" width="120px" />
       </div>
       <ion-card-header>
@@ -37,7 +37,7 @@
 
       </ion-card-header>
       <ion-card-content>
-        <ion-button expand="block" color="success" style="font-weight: bold;"> ADICIONAR AO CARRINHO</ion-button>
+        <ion-button expand="block" color="success" style="font-weight: bold; font-size: 85%;">ADICIONAR AO CARRINHO</ion-button>
       </ion-card-content>
     </ion-card>
 
