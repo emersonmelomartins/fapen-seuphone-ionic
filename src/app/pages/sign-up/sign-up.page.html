@@ -4,24 +4,239 @@
 
 <ion-content [fullscreen]="true">
   <div class="form-container">
-    <form>
-        <ion-toolbar>
-          <ion-title class="form-title">Cadastro</ion-title>
-        </ion-toolbar>
-        <ion-list lines="none">
-          <ion-label  class="form-label">E-mail</ion-label>
-          <ion-input placeholder="Digite seu E-mail." class="form-input" type="text"></ion-input>
-        </ion-list>
-        <ion-list lines="none">
-          <ion-label position="stacked" class="form-label">Nome Completo</ion-label>
-          <ion-input placeholder="Digite seu nome completo." class="form-input" type="text"></ion-input>
-        </ion-list>
-        <ion-list lines="none">
-          <a>Esqueci minha Senha</a>
-        </ion-list>
-        
-        <ion-button expand="block" color="success"> Login </ion-button>
+    <form action=""  [formGroup]="formGroup">
+
+      <ion-toolbar style="z-index: 0">
+        <h3 class="form-title">Cadastro</h3>
+      </ion-toolbar>
+
+      <ion-list lines="none">
+        <ion-label class="form-label">E-mail</ion-label>
+        <ion-input
+        formControlName="email"
+          placeholder="Digite seu E-mail."
+          class="form-input"
+          type="text"
+        ></ion-input>
+        <div
+          *ngIf="!formGroup.controls.email.valid &&
+            formGroup.controls.email.dirty"
+          class="validator-error"
+        >
+          *Email obrigatório.
+        </div>
+      </ion-list>
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label"
+          >Nome Completo</ion-label
+        >
+        <ion-input
+          formControlName="name"
+          placeholder="Digite seu nome completo."
+          class="form-input"
+          type="text"
+        ></ion-input>
+        <div
+          *ngIf="!formGroup.controls.name.valid &&
+        formGroup.controls.name.dirty"
+          class="validator-error"
+        >
+          *Nome obrigatório.
+        </div>
+      </ion-list>
+
+      <ion-list>
+        <ion-radio-group formControlName="sexo">
+          <ion-label class="form-label">Sexo</ion-label>
+
+          <ion-item>
+            <ion-label class="form-label-radio">Masculino</ion-label>
+            <ion-radio value="M" color="dark"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="form-label-radio">Feminino</ion-label>
+            <ion-radio value="F" color="dark"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="form-label-radio">Outro</ion-label>
+            <ion-radio value="O" color="dark"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label"
+          >Data de Nascimento</ion-label
+        >
+        <ion-input
+          formControlName="dateNasc"
+          placeholder="Digite sua data de nascimento."
+          class="form-input"
+          type="date"
+        ></ion-input>
+        <div
+          *ngIf="!formGroup.controls.dateNasc.valid &&
+        formGroup.controls.dateNasc.dirty"
+          class="validator-error"
+        >
+          *Data de Nascimento obrigatório.
+        </div>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label">CPF</ion-label>
+        <ion-input
+          formControlName="cpf"
+          placeholder="Digite seu CPF."
+          class="form-input"
+          type="text"
+        ></ion-input>
+        <div
+          *ngIf="!formGroup.controls.cpf.valid &&
+        formGroup.controls.cpf.dirty"
+          class="validator-error"
+        >
+          *CPF obrigatório.
+        </div>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label">Telefone</ion-label>
+        <ion-input
+          formControlName="tel"
+          placeholder="Ex (00) 1111-2234."
+          class="form-input"
+          type="text"
+        ></ion-input>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label">Celular</ion-label>
+        <ion-input
+          formControlName="cel" 
+          placeholder="Ex (00) 91111-2234."
+          class="form-input"
+          type="text"
+        ></ion-input>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label">Login</ion-label>
+        <ion-input
+          formControlName="login"
+          placeholder="Informe seu Login."
+          class="form-input"
+          type="text"
+        ></ion-input>
+        <div
+          *ngIf="!formGroup.controls.login.valid &&
+        formGroup.controls.login.dirty"
+          class="validator-error"
+        >
+          *Login obrigatório.
+        </div>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label">Senha</ion-label>
+        <ion-input
+          formControlName="password"
+          placeholder="Digite sua Senha."
+          class="form-input"
+          type="password"
+        ></ion-input>
+        <div
+          *ngIf="!formGroup.controls.password.valid &&
+        formGroup.controls.password.dirty"
+          class="validator-error"
+        >
+          *Senha obrigatório.
+        </div>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label"
+          >Confirme a Senha</ion-label
+        >
+        <ion-input
+          formControlName="confirmPassword"
+          placeholder="Confirme sua Senha."
+          class="form-input"
+          type="password"
+        ></ion-input>
+      </ion-list>
+      
+
+
+          <h3 class="form-title">Endereço</h3> 
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label">CEP</ion-label>
+        <ion-input
+          placeholder="Ex. 09360-490"
+          class="form-input"
+          type="text"
+        ></ion-input>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label">Logradouro</ion-label>
+        <ion-input
+          placeholder="Ex. Av. Caetano Scila"
+          class="form-input"
+          type="text"
+        ></ion-input>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label">Número</ion-label>
+        <ion-input
+          placeholder="Ex. 200"
+          class="form-input"
+          type="Number"
+        ></ion-input>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label">Bairro</ion-label>
+        <ion-input
+          placeholder="Ex. Parque Marajoara"
+          class="form-input"
+          type="text"
+        ></ion-input>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label">Cidade</ion-label>
+        <ion-input
+          placeholder="Ex. Santo André"
+          class="form-input"
+          type="text"
+        ></ion-input>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label">UF</ion-label>
+        <ion-select placeholder="Selecione seu Estado">
+          <ion-select-option value="São Paulo">São Paulo</ion-select-option>
+          <ion-select-option value="Minas Gerais"
+            >Minas Gerais</ion-select-option
+          >
+        </ion-select>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label">Complemento</ion-label>
+        <ion-input
+          placeholder="Ex. Ao lado do mercado"
+          class="form-input"
+          type="text"
+        ></ion-input>
+      </ion-list>
+
+      <ion-button [disabled]="!formGroup.valid" (click)="handleCadastrar()" expand="block" color="success"> Cadastrar </ion-button>
     </form>
   </div>
 </ion-content>
-
