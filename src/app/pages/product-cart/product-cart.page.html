@@ -8,6 +8,17 @@
       <ion-title class="title">Carrinho</ion-title>
     </ion-toolbar>
 
+    <!--
+      <ion-list>
+        <ion-item *ngFor="let item of itens">
+          <h2>{{item.produto.modelo}}</h2>
+          <p>{{item.produto.valor}}</p>
+          <p>item.quantidade</p>
+        </ion-item>
+      </ion-list>
+    -->
+
+
     <ion-grid>
       <ion-row>
         <ion-col size="5">
@@ -24,26 +35,27 @@
 
       <ion-row
         style="background-color: #e7e7e7; display: flex; align-items: center;"
+        *ngFor="let item of itens"
       >
         <ion-col size="4">
           <div style="display: flex; align-items: center;">
             <img src="../../../assets/iphone_1.png" width="30%" height="30%" />
 
             <div style="font-size: 7px; margin-left: 5px;">
-              <p style="font-size: 14px; line-height: 1px; font-weight: bold;">iPhone 11</p>
-              <p>Midnight green - 128gb</p>
+              <p style="font-size: 14px; line-height: 1px; font-weight: bold;">{{item.produto.modelo}}</p>
+              <p>{{item.produto.descricao}}/p>
             </div>
           </div>
         </ion-col>
         <ion-col size="4">
           <h5 style="text-align: center; font-size: 12px">
             <button style="background-color: transparent;" clear><ion-icon color="medium" style="font-size: 16px;" name="chevron-back-outline"></ion-icon></button>  
-            2
+            {{item.quantidade}}
             <button style="background-color: transparent;" clear><ion-icon color="medium" style="font-size: 16x;" name="chevron-forward-outline"></ion-icon></button> 
           </h5>
         </ion-col>
         <ion-col size="3">
-          <p style="text-align: center; font-size: 12px">R$ 1999,99</p>
+          <p style="text-align: center; font-size: 12px">R$ {{item.produto.valor}}</p>
         </ion-col>
         <ion-col size="1">
           <button style="background-color: transparent;" clear>
@@ -52,35 +64,6 @@
         </ion-col>
       </ion-row>
 
-      <ion-row
-        style="background-color: #fff; display: flex; align-items: center;"
-      >
-        <ion-col size="4">
-          <div style="display: flex; align-items: center;">
-            <img src="../../../assets/iphone_1.png" width="30%" height="30%" />
-
-            <div style="font-size: 7px; margin-left: 5px;">
-              <p style="font-size: 14px; line-height: 1px; font-weight: bold;">iPhone 11</p>
-              <p>Midnight green - 128gb</p>
-            </div>
-          </div>
-        </ion-col>
-        <ion-col size="4">
-          <h5 style="text-align: center; font-size: 12px">
-            <button style="background-color: transparent;" clear><ion-icon color="medium" style="font-size: 14px;" name="chevron-back-outline"></ion-icon></button>  
-            2
-            <button style="background-color: transparent;" clear><ion-icon color="medium" style="font-size: 14x;" name="chevron-forward-outline"></ion-icon></button> 
-          </h5>
-        </ion-col>
-        <ion-col size="3">
-          <p style="text-align: center; font-size: 12px">R$ 1999,99</p>
-        </ion-col>
-        <ion-col size="1">
-          <button style="background-color: transparent;" clear>
-            <ion-icon color="danger" style="font-size: 14px;" name="trash-bin-outline"></ion-icon>
-          </button>
-        </ion-col>
-      </ion-row>
 
     </ion-grid>
 
