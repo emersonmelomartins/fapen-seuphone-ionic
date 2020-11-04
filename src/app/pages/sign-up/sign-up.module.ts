@@ -1,23 +1,23 @@
+import { ComponentsModule } from './../../components/components.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { SignUpPageRoutingModule } from './sign-up-routing.module';
 
-import { LoginPage } from './login.page';
-import { ComponentsModule } from 'src/app/components/components.module';
+import { SignUpPage } from './sign-up.page';
 
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
-    LoginPageRoutingModule,
+    SignUpPageRoutingModule,
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [LoginPage]
+  declarations: [SignUpPage]
 })
-export class LoginPageModule {}
+export class SignUpPageModule {}

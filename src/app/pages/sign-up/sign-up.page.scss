@@ -1,0 +1,52 @@
+* {
+  font-family: "Poppins", "Arial", sans-serif;
+  color: #222;
+}
+
+.form-container {
+  margin: 20px;
+}
+
+.form-title {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 54px;
+  text-align: center;
+}
+
+.form-input {
+  height: 64px;
+  margin: 0 auto;
+  background: #ebebeb;
+  border-radius: 10px;
+}
+
+.form-label {
+  width: 61px;
+  height: 30px;
+  text-align: center;
+}
+
+.form-label-radio {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+ion-input:focus {
+  outline: none;
+}
+
+ion-item {
+  background: none;
+  outline: none;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+  border: none;
+}
+
+.validator-error {
+  color: red;
+  font-size: 12px;
+}

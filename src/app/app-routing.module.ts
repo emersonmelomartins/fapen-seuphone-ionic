@@ -20,6 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule)
   },
   {
+    path: 'sign-up',
+    loadChildren: () => import('./pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
+  },
+  {
     path: 'product-info/:id',
     loadChildren: () => import('./pages/product-info/product-info.module').then( m => m.ProductInfoPageModule)
   },
@@ -28,6 +32,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/product-cart/product-cart.module').then( m => m.ProductCartPageModule)
   },
 ];
+
 
 @NgModule({
   imports: [
