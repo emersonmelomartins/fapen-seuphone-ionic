@@ -7,22 +7,50 @@
       </ion-header>
       <ion-content>
 
-        <ion-toolbar color="dark">
+        <ion-toolbar *ngIf="isLoggedIn" color="dark">
           <ion-avatar style="margin: 10px auto;">
             <img src="../assets/xicrinha.png">
           </ion-avatar>
-          <p style="margin: 10px auto; text-align: center;">Olá, <b>Xicrinha</b>!</p>
-          <p style="margin: 10px auto; text-align: center;">xicrinha1234@seuphone.com.br</p>
+          <p style="margin: 10px auto; text-align: center;">Olá, <b>{{userLogin}}</b>!</p>
+
+          <div style="display: flex; align-items: center; justify-content: space-around; margin-bottom: 10px;">
+            <ion-button color="primary" class="btn" fill="outline">
+              <ion-icon name="person-outline"></ion-icon>
+              Meus dados
+            </ion-button>
+            <ion-button (click)="logout()" class="btn" color="danger" fill="outline">
+              <ion-icon name="log-out-outline"></ion-icon>
+              Sair
+            </ion-button>
+          </div>
+
+        </ion-toolbar>
+
+        <ion-toolbar *ngIf="!isLoggedIn" color="dark">
+          <p style="margin: 10px auto; text-align: center;">Você não está logado.</p>
+
+          <div style="display: flex; align-items: center; justify-content: space-around; margin-bottom: 10px;">
+            <ion-button [routerLink]="['/login']" class="btn" color="primary" fill="outline">
+              <ion-icon name="log-in-outline"></ion-icon>
+              Entrar
+            </ion-button>
+            <ion-button color="success" class="btn" fill="outline">
+              <ion-icon name="add-outline"></ion-icon>
+              Cadastrar
+            </ion-button>
+          </div>
+
         </ion-toolbar>
 
         <ion-list *ngFor="let pages of navigate">
         <ion-menu-toggle auto-hide="true">
-          <ion-item [routerLink]="pages.url" routerDirection="forward">
+          <ion-item [routerLink]="pages.url" routerDirection="forward" >
               <ion-icon [name]="pages.icon" size="small" slot="start"></ion-icon>
                  {{pages.title}} 
           </ion-item>
         </ion-menu-toggle>
         </ion-list>
+
       </ion-content>
     </ion-menu>
 <ion-router-outlet id="headerSideMenu"></ion-router-outlet>

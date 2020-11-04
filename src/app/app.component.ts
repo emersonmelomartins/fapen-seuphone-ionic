@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { StorageService } from './services/storage.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +14,24 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
   navigate: any;
 
+  isLoggedIn: boolean;
+  userLogin: string;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private storage: StorageService,
+    private authService: AuthService,
+    public nav: NavController,
   ) {
     this.sideMenu();
     this.initializeApp();
+
+    if(storage.getLocalUser() !== null) {
+      this.isLoggedIn = true;
+      this.userLogin = storage.getLocalUser().login;
+    }
   }
 
   initializeApp() {
@@ -38,11 +51,6 @@ export class AppComponent {
         icon  : "home"
       },
       {
-        title : "Login",
-        url   : "/login",
-        icon  : "person-outline"
-      },
-      {
         title : "Produtos",
         url   : "/products",
         icon  : "phone-portrait-outline"
@@ -53,10 +61,16 @@ export class AppComponent {
         icon  : "phone-portrait-outline"
       },
       {
-        title : "Produto Especifico",
-        url   : "/product-info/1",
-        icon  : "phone-portrait-outline"
+        title : "Carrinho",
+        url   : "/product-cart",
+        icon  : "cart-outline"
       },
     ]
+  }
+
+  logout() {
+    this.authService.logout();
+    this.nav.navigateForward("home");
+    location.reload();
   }
 }

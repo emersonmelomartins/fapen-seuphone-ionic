@@ -16,3 +16,9 @@ interface Pessoa {
   celular: string,
   telefone: string
 }
+
+export interface UserAuthLogin {
+  username: string;
+  password: string;
+  jwtToken?: string;
+}

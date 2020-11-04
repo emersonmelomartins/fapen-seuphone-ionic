@@ -4,21 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ProductsPageRoutingModule } from './products-routing.module';
+import { ProductCartPageRoutingModule } from './product-cart-routing.module';
 
-import { ProductsPage } from './products.page';
+import { ProductCartPage } from './product-cart.page';
 import { ComponentsModule } from 'src/app/components/components.module';
-import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProductsPageRoutingModule,
-    ComponentsModule,
-    PipesModule
+    ProductCartPageRoutingModule,
+    ComponentsModule
   ],
-  declarations: [ProductsPage]
+  declarations: [ProductCartPage]
 })
-export class ProductsPageModule {}
+export class ProductCartPageModule {}
