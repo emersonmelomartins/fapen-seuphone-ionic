@@ -11,13 +11,13 @@
     <ion-grid>
       <ion-row>
         <ion-col size="5">
-          <h5 style="text-align: center">Descrição</h5>
+          <h5 style="font-size: 14px; text-align: center; font-family: 'Poppins-Bold';">Descrição</h5>
         </ion-col>
         <ion-col size="3">
-          <h5 style="text-align: center">Qtde.</h5>
+          <h5 style="font-size: 14px; text-align: center; font-family: 'Poppins-Bold';">Qtde.</h5>
         </ion-col>
         <ion-col size="3">
-          <h5 style="text-align: center">Preço</h5>
+          <h5 style="font-size: 14px; text-align: center; font-family: 'Poppins-Bold';">Preço</h5>
         </ion-col>
       </ion-row>
 
@@ -25,53 +25,62 @@
       <ion-row
         style="background-color: #e7e7e7; display: flex; align-items: center;"
       >
-        <ion-col size="5">
+        <ion-col size="4">
           <div style="display: flex; align-items: center;">
             <img src="../../../assets/iphone_1.png" width="30%" height="30%" />
 
-            <div style="font-size: 12px">
-              <p>iPhone 11</p>
+            <div style="font-size: 7px; margin-left: 5px;">
+              <p style="font-size: 14px; line-height: 1px;">iPhone 11</p>
               <p>Midnight green - 128gb</p>
             </div>
           </div>
         </ion-col>
-        <ion-col size="3">
-          <h5 style="text-align: center; font-size: 12px">2</h5>
+        <ion-col size="4">
+          <h5 style="text-align: center; font-size: 12px">
+            <button clear><ion-icon color="medium" style="font-size: 14px;" name="chevron-back-outline"></ion-icon></button>  
+            2
+            <button clear><ion-icon color="medium" style="font-size: 14x;" name="chevron-forward-outline"></ion-icon></button> 
+          </h5>
         </ion-col>
         <ion-col size="3">
-          <h5 style="text-align: center; font-size: 12px">R$ 1999,99</h5>
+          <p style="text-align: center; font-size: 12px">R$ 1999,99</p>
         </ion-col>
         <ion-col size="1">
-          <ion-icon name="trash-outline"></ion-icon>
+          <ion-icon color="danger" style="font-size: 14px;" name="trash-bin-outline"></ion-icon>
         </ion-col>
       </ion-row>
 
       <ion-row
         style="background-color: #fff; display: flex; align-items: center;"
       >
-        <ion-col size="5">
+        <ion-col size="4">
           <div style="display: flex; align-items: center;">
             <img src="../../../assets/iphone_1.png" width="30%" height="30%" />
 
-            <div style="font-size: 12px">
-              <p>iPhone 11</p>
+            <div style="font-size: 7px; margin-left: 5px;">
+              <p style="font-size: 14px; line-height: 1px;">iPhone 11</p>
               <p>Midnight green - 128gb</p>
             </div>
           </div>
         </ion-col>
-        <ion-col size="3">
-          <h5 style="text-align: center; font-size: 12px">2</h5>
+        <ion-col size="4">
+          <h5 style="text-align: center; font-size: 12px">
+            <button clear><ion-icon color="medium" style="font-size: 14px;" name="chevron-back-outline"></ion-icon></button>  
+            2
+            <button clear><ion-icon color="medium" style="font-size: 14x;" name="chevron-forward-outline"></ion-icon></button> 
+          </h5>
         </ion-col>
         <ion-col size="3">
-          <h5 style="text-align: center; font-size: 12px">R$ 1999,99</h5>
+          <p style="text-align: center; font-size: 12px">R$ 1999,99</p>
         </ion-col>
         <ion-col size="1">
-          <ion-icon name="trash-outline"></ion-icon>
+          <ion-icon color="danger" style="font-size: 14px;" name="trash-bin-outline"></ion-icon>
         </ion-col>
       </ion-row>
+
     </ion-grid>
 
-    <ion-button expand="block" color="success"> PROXIMO PASSO </ion-button>
-    <ion-button expand="block" color="primary"> CONTINUAR COMPRANDO </ion-button>
+    <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="success">Próximo Passo</ion-button>
+    <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="primary">Continuar Comprando</ion-button>
   </div>
 </ion-content>

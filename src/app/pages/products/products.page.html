@@ -8,7 +8,6 @@
       (ionChange)="searchProducts($event)"
       class="searchbar-input"
       placeholder="Buscar..."
-      color="light"
     >
     </ion-searchbar>
   </ion-toolbar>
@@ -43,7 +42,8 @@
             [routerLink]="['/product-info/' + product.idProduto]"
             color="success"
             expand="block"
-            >VER PRODUTO</ion-button
+            class="btn"
+            >Ver Produto</ion-button
           >
         </ion-col>
       </ion-row>

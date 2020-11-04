@@ -14,11 +14,11 @@
           <p style="margin: 10px auto; text-align: center;">Olá, <b>{{userLogin}}</b>!</p>
 
           <div style="display: flex; align-items: center; justify-content: space-around; margin-bottom: 10px;">
-            <ion-button color="primary">
+            <ion-button color="primary" class="btn" fill="outline">
               <ion-icon name="person-outline"></ion-icon>
               Meus dados
             </ion-button>
-            <ion-button (click)="logout()" color="danger">
+            <ion-button (click)="logout()" class="btn" color="danger" fill="outline">
               <ion-icon name="log-out-outline"></ion-icon>
               Sair
             </ion-button>
@@ -30,11 +30,11 @@
           <p style="margin: 10px auto; text-align: center;">Você não está logado.</p>
 
           <div style="display: flex; align-items: center; justify-content: space-around; margin-bottom: 10px;">
-            <ion-button [routerLink]="['/login']" color="primary">
+            <ion-button [routerLink]="['/login']" class="btn" color="primary" fill="outline">
               <ion-icon name="log-in-outline"></ion-icon>
               Entrar
             </ion-button>
-            <ion-button color="success">
+            <ion-button color="success" class="btn" fill="outline">
               <ion-icon name="add-outline"></ion-icon>
               Cadastrar
             </ion-button>

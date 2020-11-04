@@ -30,5 +30,39 @@
   color: #fff !important;
   height: 50px !important;
   border-radius: 10px !important;
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
+  box-shadow: none !important;
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.searchbar-input-container .sc-ion-searchbar-md {
+  margin-top: 7px !important;
+}
+
+.searchbar-search-icon {
+  padding-top: 4px;
+}
+
+.btn {
+  font-family: "Poppins-Bold" !important;
+  font-size: 16px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  text-transform: capitalize !important;
+  border-radius: 10px !important;
+  --border-radius: 10px !important;
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+ion-menu-button {
+  font-size: 35px;
+}
+
+.swiper-pagination {
+  display: none;
 }
