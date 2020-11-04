@@ -49,16 +49,16 @@
         </ion-col>
         <ion-col size="4">
           <h5 style="text-align: center; font-size: 12px">
-            <button style="background-color: transparent;" clear><ion-icon color="medium" style="font-size: 16px;" name="chevron-back-outline"></ion-icon></button>  
+            <button style="background-color: transparent;" (click)="decreaseQuantity(item.produto)" clear><ion-icon color="medium" style="font-size: 16px;" name="chevron-back-outline"></ion-icon></button>  
             {{item.quantidade}}
-            <button style="background-color: transparent;" clear><ion-icon color="medium" style="font-size: 16x;" name="chevron-forward-outline"></ion-icon></button> 
+            <button style="background-color: transparent;" (click)="increaseQuantity(item.produto)" clear><ion-icon color="medium" style="font-size: 16x;" name="chevron-forward-outline"></ion-icon></button> 
           </h5>
         </ion-col>
         <ion-col size="3">
           <p style="text-align: center; font-size: 12px">R$ {{item.produto.valor}}</p>
         </ion-col>
         <ion-col size="1">
-          <button style="background-color: transparent;" clear>
+          <button style="background-color: transparent;" (click)="removeProduct(item.produto)" clear>
             <ion-icon color="danger" style="font-size: 16px;" name="trash-bin-outline"></ion-icon>
           </button>
         </ion-col>
@@ -67,7 +67,16 @@
 
     </ion-grid>
 
+    <div style="display: flex; justify-content: space-between;" *ngIf="total() > 0">
+        <h2>Total</h2>
+        <h2><b>R$ {{total()}}</b></h2>
+    </div>
+
+    <div *ngIf="total() <= 0">
+      <p style="text-align: center;">Seu carrinho está vazio.</p>
+  </div>
+
     <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="success">Próximo Passo</ion-button>
-    <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="primary">Continuar Comprando</ion-button>
+    <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="primary" (click)="continueShopping()">Continuar Comprando</ion-button>
   </div>
 </ion-content>

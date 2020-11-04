@@ -30,7 +30,7 @@
           <p style="margin: 10px auto; text-align: center;">Você não está logado.</p>
 
           <div style="display: flex; align-items: center; justify-content: space-around; margin-bottom: 10px;">
-            <ion-button [routerLink]="['/login']" class="btn" color="primary" fill="outline">
+            <ion-button (click)="login()" class="btn" color="primary" fill="outline">
               <ion-icon name="log-in-outline"></ion-icon>
               Entrar
             </ion-button>

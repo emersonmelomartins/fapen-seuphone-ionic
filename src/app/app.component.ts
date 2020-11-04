@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController, Platform } from '@ionic/angular';
+import { MenuController, NavController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { StorageService } from './services/storage.service';
@@ -24,6 +24,7 @@ export class AppComponent {
     private storage: StorageService,
     private authService: AuthService,
     public nav: NavController,
+    public menu: MenuController,
   ) {
     this.sideMenu();
     this.initializeApp();
@@ -72,5 +73,10 @@ export class AppComponent {
     this.authService.logout();
     this.nav.navigateForward("home");
     location.reload();
+  }
+
+  login() {
+    this.nav.navigateForward("login");
+    this.menu.close();
   }
 }
