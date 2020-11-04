@@ -175,61 +175,109 @@
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">CEP</ion-label>
         <ion-input
+          formControlName="cep"
           placeholder="Ex. 09360-490"
           class="form-input"
           type="text"
         ></ion-input>
+        <div
+        *ngIf="!formGroup.controls.cep.valid &&
+      formGroup.controls.cep.dirty"
+        class="validator-error"
+      >
+        *CEP obrigatório.
+      </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Logradouro</ion-label>
         <ion-input
+          formControlName="logradouro"
           placeholder="Ex. Av. Caetano Scila"
           class="form-input"
           type="text"
         ></ion-input>
+        <div
+        *ngIf="!formGroup.controls.logradouro.valid &&
+      formGroup.controls.logradouro.dirty"
+        class="validator-error"
+      >
+        *Logradouro obrigatório.
+      </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Número</ion-label>
         <ion-input
+          formControlName="number"
           placeholder="Ex. 200"
           class="form-input"
           type="Number"
         ></ion-input>
+        <div
+        *ngIf="!formGroup.controls.number.valid &&
+      formGroup.controls.number.dirty"
+        class="validator-error"
+      >
+        *Número obrigatório.
+      </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Bairro</ion-label>
         <ion-input
+          formControlName="neighborhood"
           placeholder="Ex. Parque Marajoara"
           class="form-input"
           type="text"
         ></ion-input>
+        <div
+        *ngIf="!formGroup.controls.neighborhood.valid &&
+      formGroup.controls.neighborhood.dirty"
+        class="validator-error"
+      >
+        *Bairro obrigatório.
+      </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Cidade</ion-label>
         <ion-input
+          formControlName="city"
           placeholder="Ex. Santo André"
           class="form-input"
           type="text"
         ></ion-input>
+        <div
+        *ngIf="!formGroup.controls.city.valid &&
+      formGroup.controls.city.dirty"
+        class="validator-error"
+      >
+        *Cidade obrigatório.
+      </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">UF</ion-label>
-        <ion-select placeholder="Selecione seu Estado">
+        <ion-select formControlName="uf" placeholder="Selecione seu Estado">
           <ion-select-option value="São Paulo">São Paulo</ion-select-option>
           <ion-select-option value="Minas Gerais"
             >Minas Gerais</ion-select-option
           >
         </ion-select>
+        <div
+        *ngIf="!formGroup.controls.uf.valid &&
+      formGroup.controls.uf.dirty"
+        class="validator-error"
+      >
+        *UF obrigatório.
+      </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Complemento</ion-label>
         <ion-input
+          formControlName="complement"
           placeholder="Ex. Ao lado do mercado"
           class="form-input"
           type="text"

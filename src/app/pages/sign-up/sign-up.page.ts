@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,16 +9,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SignUpPage implements OnInit {
 
   public formGroup: FormGroup;
+  
+  public pessoa = {
+    name: "",
+    tel: "",
+    cel: "",
+  }
 
   public user = {
-    email: "",
-    name: "",
-    dateNasc: "",
-    sexo: "",
-    cpf: "",
     login: "",
     password: "",
     confirmPassword: "",
+    email: "",
+    dateNasc: "",
+    sexo: "",
+    pessoa: this.pessoa,
+    cpf: "",
   }
 
   public endereco = {
@@ -28,6 +34,7 @@ export class SignUpPage implements OnInit {
     neighborhood: "" ,
     city: "" ,
     uf: "",
+    complement: "",
   }
 
   constructor(private formBuilder: FormBuilder) {
@@ -48,10 +55,11 @@ export class SignUpPage implements OnInit {
         ]),
       ],
       confirmPassword: [
-        this.user.password,
+        this.user.confirmPassword,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
+          this.validatePassword
         ]),
       ],
       email: [
@@ -62,7 +70,7 @@ export class SignUpPage implements OnInit {
         ]),
       ],
       name: [
-        this.user.name,
+        this.pessoa.name,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
@@ -72,7 +80,7 @@ export class SignUpPage implements OnInit {
         this.user.dateNasc,
         Validators.compose([
           Validators.required,
-          Validators.minLength(10),
+          Validators.minLength(1),
         ]),
       ],
       sexo: [
@@ -85,14 +93,14 @@ export class SignUpPage implements OnInit {
         this.user.cpf,
         Validators.compose([
           Validators.required,
-          Validators.minLength(14),
+          Validators.minLength(1),
         ]),
       ],
       cep: [
         this.endereco.cep,
         Validators.compose([
           Validators.required,
-          Validators.minLength(9),
+          Validators.minLength(1),
         ]),
       ],
       logradouro: [
@@ -137,15 +145,17 @@ export class SignUpPage implements OnInit {
   ngOnInit() {
   }
 
-//   checkPasswords(group: FormGroup) {
-//   let pass = group.get('password').value;
-//   let confirmPass = group.get('confirmPass').value;
+  validatePassword = (confirmPassword: FormControl): ValidatorFn => {
+    console.log(confirmPassword.value); 
+    if (this.formGroup) {
+      console.log(this.formGroup.get('password').value);
+    }
+    return null;
+  }
 
-//   return pass === confirmPass ? null : { notSame: true }     
-// }
 
   handleCadastrar() {
-    console.log(this.formGroup.value);
+    console.log(this.formGroup.getRawValue());
   }
 
 }
