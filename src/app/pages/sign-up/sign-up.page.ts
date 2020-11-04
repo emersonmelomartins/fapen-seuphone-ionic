@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { User, Pessoa, Endereco} from 'src/app/models/User';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,31 +11,31 @@ export class SignUpPage implements OnInit {
 
   public formGroup: FormGroup;
   
-  public pessoa = {
-    name: "",
-    tel: "",
-    cel: "",
-  }
-
-  public user = {
-    login: "",
-    password: "",
-    confirmPassword: "",
-    email: "",
-    dateNasc: "",
-    sexo: "",
-    pessoa: this.pessoa,
+  public pessoa: Pessoa = {
+    nome: "",
     cpf: "",
+    dtNascimento: "",
+    sexo: "",
+    celular: "",
+    telefone: ""
   }
 
-  public endereco = {
+  public user: User = {
+    pessoa: this.pessoa,
+    login: "",
+    senha: "",
+    confirmarSenha: "",
+    email: "",
+  }
+
+  public endereco: Endereco = {
     cep: "" ,
     logradouro: "" ,
-    number: "" ,
-    neighborhood: "" ,
-    city: "" ,
+    numero: "" ,
+    bairro: "" ,
+    cidade: "" ,
     uf: "",
-    complement: "",
+    complemento: "",
   }
 
   constructor(private formBuilder: FormBuilder) {
@@ -47,15 +48,15 @@ export class SignUpPage implements OnInit {
           Validators.minLength(1),
         ]),
       ],
-      password: [
-        this.user.password,
+      senha: [
+        this.user.senha,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
-      confirmPassword: [
-        this.user.confirmPassword,
+      confirmarSenha: [
+        this.user.confirmarSenha,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
@@ -69,28 +70,28 @@ export class SignUpPage implements OnInit {
           Validators.minLength(1),
         ]),
       ],
-      name: [
-        this.pessoa.name,
+      nome: [
+        this.pessoa.nome,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
-      dateNasc: [
-        this.user.dateNasc,
+      dtNascimento: [
+        this.pessoa.dtNascimento,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
       sexo: [
-        this.user.sexo,
+        this.pessoa.sexo,
         Validators.compose([
           Validators.required,
         ]),
       ],
       cpf: [
-        this.user.cpf,
+        this.pessoa.cpf,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
@@ -111,21 +112,21 @@ export class SignUpPage implements OnInit {
         ]),
       ],
       number: [
-        this.endereco.number,
+        this.endereco.numero,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
       neighborhood: [
-        this.endereco.neighborhood,
+        this.endereco.bairro,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
       city: [
-        this.endereco.city,
+        this.endereco.cidade,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
@@ -148,7 +149,7 @@ export class SignUpPage implements OnInit {
   validatePassword = (confirmPassword: FormControl): ValidatorFn => {
     console.log(confirmPassword.value); 
     if (this.formGroup) {
-      console.log(this.formGroup.get('password').value);
+      console.log(this.formGroup.get('senha').value);
     }
     return null;
   }
