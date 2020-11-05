@@ -34,16 +34,17 @@
 
 
       <ion-row
-        style="background-color: #e7e7e7; display: flex; align-items: center;"
-        *ngFor="let item of itens"
+      *ngFor="let item of itens; let i = index"
+      [ngClass]="{'bg-gray': i%2 === 0}"style="display: flex; align-items: center; justify-content: center;"
       >
         <ion-col size="4">
           <div style="display: flex; align-items: center;">
-            <img src="../../../assets/iphone_1.png" width="30%" height="30%" />
+            <img [src]="item.produto.fotoEmString != null ? item.produto.fotoEmString : 'assets/sem-imagem.png'" width="30%" height="30%" />
 
-            <div style="font-size: 7px; margin-left: 5px;">
-              <p style="font-size: 14px; line-height: 1px; font-weight: bold;">{{item.produto.modelo}}</p>
-              <p>{{item.produto.descricao}}/p>
+            <div style="font-size: 6px; margin-left: 5px;">
+              <span style="font-size: 10px; line-height: 16px; font-weight: bold;">{{item.produto.modelo}}</span>
+              <br/>
+              <span>{{item.produto.descricao}}</span>
             </div>
           </div>
         </ion-col>
@@ -51,15 +52,15 @@
           <h5 style="text-align: center; font-size: 12px">
             <button style="background-color: transparent;" (click)="decreaseQuantity(item.produto)" clear><ion-icon color="medium" style="font-size: 16px;" name="chevron-back-outline"></ion-icon></button>  
             {{item.quantidade}}
-            <button style="background-color: transparent;" (click)="increaseQuantity(item.produto)" clear><ion-icon color="medium" style="font-size: 16x;" name="chevron-forward-outline"></ion-icon></button> 
+            <button style="background-color: transparent;" (click)="increaseQuantity(item.produto)" clear><ion-icon color="medium" style="font-size: 16px;" name="chevron-forward-outline"></ion-icon></button> 
           </h5>
         </ion-col>
         <ion-col size="3">
-          <p style="text-align: center; font-size: 12px">R$ {{item.produto.valor}}</p>
+          <p style="text-align: center; font-size: 10px">R$ {{item.produto.valor}}</p>
         </ion-col>
         <ion-col size="1">
           <button style="background-color: transparent;" (click)="removeProduct(item.produto)" clear>
-            <ion-icon color="danger" style="font-size: 16px;" name="trash-bin-outline"></ion-icon>
+            <ion-icon color="danger" style="font-size: 14px;" name="trash-bin-outline"></ion-icon>
           </button>
         </ion-col>
       </ion-row>
