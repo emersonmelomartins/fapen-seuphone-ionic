@@ -18,7 +18,7 @@
         <ion-card-subtitle class="product-subtitle">Cor</ion-card-subtitle>
         <ion-card-subtitle>
           <div class="square-container">
-            <div class="square green-square"></div>
+            <div class="square" [ngStyle]="{'background-color': product.corEmHexadecimal}"></div>
             <p class="product-subtitle-content">{{product.cor}}</p>
           </div>
         </ion-card-subtitle>
@@ -27,7 +27,7 @@
         <ion-card-subtitle class="product-subtitle-content">{{product.modelo}}</ion-card-subtitle>
 
         <ion-card-subtitle class="product-subtitle">Capacidade</ion-card-subtitle>
-        <ion-card-subtitle class="product-subtitle-content">(Sem retorno da api)</ion-card-subtitle>
+        <ion-card-subtitle class="product-subtitle-content">{{product.capacidade}}</ion-card-subtitle>
         
         <ion-card-subtitle class="product-subtitle">Preço</ion-card-subtitle>
         <ion-card-subtitle class="product-subtitle-content">
