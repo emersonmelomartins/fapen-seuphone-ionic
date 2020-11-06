@@ -39,6 +39,10 @@ const routes: Routes = [
     path: 'password-recover',
     loadChildren: () => import('./pages/password-recover/password-recover.module').then( m => m.PasswordRecoverPageModule)
   },
+  {
+    path: 'confirm-order',
+    loadChildren: () => import('./pages/confirm-order/confirm-order.module').then( m => m.ConfirmOrderPageModule)
+  },
 ];
 
 
