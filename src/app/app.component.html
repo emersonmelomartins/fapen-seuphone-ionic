@@ -14,7 +14,7 @@
           <p style="margin: 10px auto; text-align: center;">Olá, <b>{{userLogin}}</b>!</p>
 
           <div style="display: flex; align-items: center; justify-content: space-around; margin-bottom: 10px;">
-            <ion-button color="primary" class="btn" fill="outline">
+            <ion-button (click)="myInfo()" color="primary" class="btn" fill="outline">
               <ion-icon name="person-outline"></ion-icon>
               Meus dados
             </ion-button>
@@ -34,7 +34,7 @@
               <ion-icon name="log-in-outline"></ion-icon>
               Entrar
             </ion-button>
-            <ion-button color="success" class="btn" fill="outline">
+            <ion-button (click)="newUser()" color="success" class="btn" fill="outline">
               <ion-icon name="add-outline"></ion-icon>
               Cadastrar
             </ion-button>

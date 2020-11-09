@@ -1,9 +1,19 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>user-info</ion-title>
-  </ion-toolbar>
+  <app-header></app-header>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <div classs="container">
+    <ion-toolbar style="z-index: 0">
+      <h2 class="title">Meus Dados</h2>
+    </ion-toolbar>
 
+    <ion-avatar style="text-align: center; margin: 0 auto">
+      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+    </ion-avatar>
+    <input type="file" id="file-input" (change)="carregaImagem($event)"
+    accept="image/png, image/jpeg">
+
+    <ion-button class="btn" expand="block" color="success"> Atualizar Avatar </ion-button>
+  </div>
 </ion-content>

@@ -79,4 +79,14 @@ export class AppComponent {
     this.nav.navigateForward("login");
     this.menu.close();
   }
+
+  newUser() {
+    this.nav.navigateForward("sign-up");
+    this.menu.close();
+  }
+
+  myInfo() {
+    this.nav.navigateForward("user-info");
+    this.menu.close();
+  }
 }

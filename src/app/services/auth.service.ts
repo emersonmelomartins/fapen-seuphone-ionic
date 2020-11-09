@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalUser } from '../models/LocalUser';
@@ -38,5 +38,14 @@ export class AuthService {
 
   logout() {
     this.storage.setLocalUser(null);
+  }
+
+  findByLogin(login: string) {
+    let token = this.storage.getLocalUser().token;
+    let headers = new HttpHeaders({"Authorization": "Bearer " + token});
+
+    return this.http.get(`http://localhost:8080/api/usuarios/${login}`,
+     { 'headers': headers }
+    );
   }
 }

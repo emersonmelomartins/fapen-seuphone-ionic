@@ -54,10 +54,11 @@ export class LoginPage implements OnInit {
       (data) => {
         this.authService.successfulLogin(data.body.jwtToken);
         this.nav.navigateForward("home");
+        alert("Login efetuado com sucesso!");
         location.reload();
       },
       (error) => {
-        console.log("Ocorreu um Erro!", error);
+        alert("Ocorreu um Erro!");
       }
     );
   }
