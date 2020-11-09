@@ -42,7 +42,11 @@ export class AuthService {
 
   findByLogin(login: string) {
     let token = this.storage.getLocalUser().token;
-    let headers = new HttpHeaders({"Authorization": "Bearer " + token});
+    let headers = new HttpHeaders({
+      "Access-Control-Allow-Origin": "DELETE, POST, GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+      "Authorization": "Bearer " + token,
+    });
 
     return this.http.get(`http://localhost:8080/api/usuarios/${login}`,
      { 'headers': headers }

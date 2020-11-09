@@ -9,11 +9,11 @@
     </ion-toolbar>
 
     <ion-avatar style="text-align: center; margin: 0 auto">
-      <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      <img [src]="  ">
     </ion-avatar>
-    <input type="file" id="file-input" (change)="carregaImagem($event)"
+    <input type="file" id="file-input" (change)="loadAvatar($event)"
     accept="image/png, image/jpeg">
 
-    <ion-button class="btn" expand="block" color="success"> Atualizar Avatar </ion-button>
+    <ion-button (click)="updateAvatar()" class="btn" expand="block" color="success"> Atualizar Avatar </ion-button>
   </div>
 </ion-content>
