@@ -9,7 +9,7 @@
 
         <ion-toolbar *ngIf="isLoggedIn" color="dark">
           <ion-avatar style="margin: 10px auto;">
-            <img src="../assets/xicrinha.png">
+            <img *ngIf="userInfo !== undefined && userInfo !== '' && userInfo !== null" src="{{userInfo.fotoEmString}}" />
           </ion-avatar>
           <p style="margin: 10px auto; text-align: center;">Olá, <b>{{userLogin}}</b>!</p>
 

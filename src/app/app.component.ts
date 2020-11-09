@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
+import { UsersService } from './services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent {
 
   isLoggedIn: boolean;
   userLogin: string;
+  userInfo: any;
 
   constructor(
     private platform: Platform,
@@ -32,6 +34,10 @@ export class AppComponent {
     if(storage.getLocalUser() !== null) {
       this.isLoggedIn = true;
       this.userLogin = storage.getLocalUser().login;
+
+      this.authService.findByLogin(this.userLogin).subscribe(resp => {
+        this.userInfo = resp;
+      })
     }
   }
 
@@ -68,6 +74,8 @@ export class AppComponent {
       },
     ]
   }
+
+  
 
   logout() {
     this.authService.logout();

@@ -24,10 +24,9 @@ export class UserInfoPage implements OnInit {
     let localUser = this.storage.getLocalUser();
     if(localUser && localUser.login) {
       this.postUserData.userLogin = localUser.login;
-      /*
         this.authService.findByLogin(localUser.login).subscribe(resp => {
+          this.userInfo = resp;
         });
-      */
     }
   }
 
@@ -45,7 +44,7 @@ export class UserInfoPage implements OnInit {
 
   updateAvatar() {
     this.usersService.updateAvatar(this.postUserData).subscribe(resp => {
-      console.log(resp);
+      location.reload();
     })
   }
 }
