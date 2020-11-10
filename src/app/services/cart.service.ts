@@ -45,7 +45,6 @@ export class CartService {
   }
 
   async checkCart(cart: Cart) {
-    let filteredCart;
     if (cart.itens.length > 0) {
       for (let i = 0; i < cart.itens.length; i++) {
         await this.checkStock(cart.itens[i].produto.idProduto);
@@ -55,6 +54,7 @@ export class CartService {
             (item) => item.produto.idProduto == cart.itens[i].produto.idProduto
           );
 
+          // Ajustar para tirar do carrinho todos os itens sem estoque.
           if (position != -1) {
             cart.itens.splice(position, 1);
           }
@@ -143,13 +143,13 @@ export class CartService {
   total(): number {
     let cart = this.getCart();
 
-    let sum = 0;
+    let sum: number = 0;
 
     for (let i = 0; i < cart.itens.length; i++) {
-      sum = sum + cart.itens[i].produto.valor * cart.itens[i].quantidade;
+      sum = sum + Number(cart.itens[i].produto.valor) * Number(cart.itens[i].quantidade);
     }
 
-    return sum;
+    return Number(sum.toFixed(2));
   }
 
   continueShopping() {
