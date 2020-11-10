@@ -17,4 +17,8 @@ export class ProductsService {
   getProduct(id) {
     return this.http.get<Product>(`http://localhost:8080/api/produtos/${id}`);
   }
+
+  checkStock(id) {
+    return this.http.get<Product>(`http://localhost:8080/api/produtos/verificaEstoque/${id}`);
+  }
 }

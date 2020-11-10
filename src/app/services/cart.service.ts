@@ -1,15 +1,22 @@
-import { Injectable } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { Cart } from '../models/Cart';
-import { Product } from '../models/Product';
-import { StorageService } from './storage.service';
+import { Injectable } from "@angular/core";
+import { NavController } from "@ionic/angular";
+import { STORAGE_KEYS } from '../config/storage_keys.config';
+import { Cart } from "../models/Cart";
+import { Product } from "../models/Product";
+import { ProductsService } from "./products.service";
+import { StorageService } from "./storage.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class CartService {
+  public estoque: any;
 
-  constructor(public storage: StorageService, public nav: NavController) { }
+  constructor(
+    public storage: StorageService,
+    public nav: NavController,
+    public productsService: ProductsService
+  ) {}
 
   createOrCleanCart(): Cart {
     let cart: Cart = { itens: [] };
@@ -20,21 +27,56 @@ export class CartService {
 
   getCart(): Cart {
     let cart: Cart = this.storage.getCart();
-    if(cart == null) {
+    if (cart == null) {
       cart = this.createOrCleanCart();
     }
 
     return cart;
   }
 
+  async checkStock(id) {
+    return new Promise((resolve, reject) => {
+      this.productsService.checkStock(id).subscribe((resp) => {
+        this.estoque = resp;
+        resolve();
+        return resp;
+      });
+    });
+  }
+
+  async checkCart(cart: Cart) {
+    let filteredCart;
+    if (cart.itens.length > 0) {
+      for (let i = 0; i < cart.itens.length; i++) {
+        await this.checkStock(cart.itens[i].produto.idProduto);
+
+        if (!this.estoque.temEstoque) {
+          let position = cart.itens.findIndex(
+            (item) => item.produto.idProduto == cart.itens[i].produto.idProduto
+          );
+
+          if (position != -1) {
+            cart.itens.splice(position, 1);
+          }
+
+          alert(
+            "Um produto do seu carrinho foi removido por falta de estoque."
+            );
+          }
+          this.storage.setCart(cart);
+        }
+    }
+  }
+
   addProduct(produto: Product): Cart {
     let cart = this.getCart();
 
-    let position = cart.itens.findIndex(item => item.produto.idProduto == produto.idProduto);
+    let position = cart.itens.findIndex(
+      (item) => item.produto.idProduto == produto.idProduto
+    );
 
-    
-    if(position == -1) {
-      cart.itens.push({quantidade: 1, produto: produto});
+    if (position == -1) {
+      cart.itens.push({ quantidade: 1, produto: produto });
     }
     this.storage.setCart(cart);
 
@@ -44,9 +86,11 @@ export class CartService {
   removeProduct(produto: Product): Cart {
     let cart = this.getCart();
 
-    let position = cart.itens.findIndex(item => item.produto.idProduto == produto.idProduto);
+    let position = cart.itens.findIndex(
+      (item) => item.produto.idProduto == produto.idProduto
+    );
 
-    if(position != -1) {
+    if (position != -1) {
       cart.itens.splice(position, 1);
     }
     this.storage.setCart(cart);
@@ -54,13 +98,24 @@ export class CartService {
     return cart;
   }
 
-  increaseQuantity(produto: Product): Cart {
+  async increaseQuantity(produto: Product): Promise<Cart> {
     let cart = this.getCart();
 
-    let position = cart.itens.findIndex(item => item.produto.idProduto == produto.idProduto);
+    let position = cart.itens.findIndex(
+      (item) => item.produto.idProduto == produto.idProduto
+    );
 
-    if(position != -1) {
-      cart.itens[position].quantidade++;
+    if (position != -1) {
+      await this.checkStock(cart.itens[position].produto.idProduto);
+
+      if (
+        this.estoque !== undefined &&
+        cart.itens[position].quantidade < this.estoque.quantidade_estoque
+      ) {
+        cart.itens[position].quantidade++;
+      } else {
+        alert("Você atingiu o limite de estoque disponível.");
+      }
     }
     this.storage.setCart(cart);
 
@@ -70,11 +125,13 @@ export class CartService {
   decreaseQuantity(produto: Product): Cart {
     let cart = this.getCart();
 
-    let position = cart.itens.findIndex(item => item.produto.idProduto == produto.idProduto);
+    let position = cart.itens.findIndex(
+      (item) => item.produto.idProduto == produto.idProduto
+    );
 
-    if(position != -1) {
+    if (position != -1) {
       cart.itens[position].quantidade--;
-      if(cart.itens[position].quantidade < 1) {
+      if (cart.itens[position].quantidade < 1) {
         cart = this.removeProduct(produto);
       }
     }
@@ -88,7 +145,7 @@ export class CartService {
 
     let sum = 0;
 
-    for(let i = 0; i < cart.itens.length; i++) {
+    for (let i = 0; i < cart.itens.length; i++) {
       sum = sum + cart.itens[i].produto.valor * cart.itens[i].quantidade;
     }
 

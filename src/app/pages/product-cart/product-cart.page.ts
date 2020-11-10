@@ -15,12 +15,17 @@ export class ProductCartPage {
 
   public itens: CartItem[];
 
-  constructor(public cartService: CartService, public nav: NavController) { }
+  constructor(public cartService: CartService, public nav: NavController) {
+   }
 
   ionViewDidEnter() {
+    
     let cart = this.cartService.getCart();
 
     this.itens = cart.itens;
+
+    this.cartService.checkCart(cart);
+    
   }
 
 
@@ -28,8 +33,8 @@ export class ProductCartPage {
     this.itens = this.cartService.removeProduct(produto).itens;
   }
 
-  increaseQuantity(produto: Product) {
-    this.itens = this.cartService.increaseQuantity(produto).itens;
+  async increaseQuantity(produto: Product) {
+    this.itens = (await this.cartService.increaseQuantity(produto)).itens;
   }
 
   decreaseQuantity(produto: Product) {
