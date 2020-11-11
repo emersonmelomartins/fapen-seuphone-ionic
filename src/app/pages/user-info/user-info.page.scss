@@ -19,3 +19,33 @@ ion-avatar {
   width: 100px;
   height: 100px;
 }
+
+ion-radio {
+  padding: 0;
+  margin: 0;
+}
+
+.form-input {
+  height: 64px;
+  margin: 0 auto;
+  background: #ebebeb;
+  border-radius: 10px;
+}
+
+.form-label {
+  width: 61px;
+  height: 30px;
+  text-align: center;
+}
+
+ion-input:focus {
+  outline: none;
+}
+
+ion-item {
+  background: none;
+  outline: none;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+  border: none;
+}
