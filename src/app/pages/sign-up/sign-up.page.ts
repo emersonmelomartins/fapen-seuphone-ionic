@@ -1,3 +1,4 @@
+import { UsersService } from 'src/app/services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { User, Pessoa, Endereco} from 'src/app/models/User';
@@ -11,8 +12,19 @@ export class SignUpPage implements OnInit {
 
   public formGroup: FormGroup;
   
+    public endereco: Endereco = {
+      cep: "" ,
+      logradouro: "" ,
+      numero: "" ,
+      bairro: "" ,
+      cidade: "" ,
+      uf: "",
+      complemento: "",
+    }
+  
   public pessoa: Pessoa = {
     nome: "",
+    endereco: this.endereco,
     cpf: "",
     dtNascimento: "",
     sexo: "",
@@ -28,17 +40,10 @@ export class SignUpPage implements OnInit {
     email: "",
   }
 
-  public endereco: Endereco = {
-    cep: "" ,
-    logradouro: "" ,
-    numero: "" ,
-    bairro: "" ,
-    cidade: "" ,
-    uf: "",
-    complemento: "",
-  }
-
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UsersService
+    ) {
     
     this.formGroup = formBuilder.group({
       login: [
@@ -157,6 +162,14 @@ export class SignUpPage implements OnInit {
 
   handleCadastrar() {
     console.log(this.formGroup.getRawValue());
+    this.userService.createUser(this.user).subscribe(
+      (data) => {
+        location.reload();
+      },
+      (error) => {
+        console.log("Ocorreu um Erro!", error);
+      }
+    )
   }
 
 }

@@ -56,11 +56,6 @@ export class AppComponent {
         icon  : "phone-portrait-outline"
       },
       {
-        title : "Cadastrar",
-        url   : "/sign-up",
-        icon  : "phone-portrait-outline"
-      },
-      {
         title : "Carrinho",
         url   : "/product-cart",
         icon  : "cart-outline"

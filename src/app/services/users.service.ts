@@ -14,7 +14,7 @@ export class UsersService {
   
 
   createUser(user: User) {
-    return this.http.post(`http://localhost:8080/api/usuarios`, user);
+    return this.http.post(`http://localhost:8080/api/usuarios/criarUsuarios`, user);
   }
 
   getUserInfo({login}: User) {

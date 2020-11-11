@@ -10,6 +10,7 @@ export interface User {
 }
 export interface Pessoa {
   idPessoa?: number,
+  endereco: Endereco,
   nome: string,
   cpf: string,
   dtNascimento: string,
