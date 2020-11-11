@@ -5,69 +5,137 @@
 <ion-content [fullscreen]="true">
   <div class="container">
     <ion-toolbar>
-      <ion-title class="title">Carrinho</ion-title>
+      <h2 class="title">Carrinho</h2>
     </ion-toolbar>
-
-    <!--
-      <ion-list>
-        <ion-item *ngFor="let item of itens">
-          <h2>{{item.produto.modelo}}</h2>
-          <p>{{item.produto.valor}}</p>
-          <p>item.quantidade</p>
-        </ion-item>
-      </ion-list>
-    -->
-
-
     <ion-grid>
       <ion-row>
         <ion-col size="5">
-          <h5 style="font-size: 14px; text-align: center; font-family: 'Poppins-Bold';">Descrição</h5>
+          <h5
+            style="
+              font-size: 14px;
+              text-align: center;
+              font-family: 'Poppins-Bold';
+            "
+          >
+            Descrição
+          </h5>
         </ion-col>
         <ion-col size="3">
-          <h5 style="font-size: 14px; text-align: center; font-family: 'Poppins-Bold';">Qtde.</h5>
+          <h5
+            style="
+              font-size: 14px;
+              text-align: center;
+              font-family: 'Poppins-Bold';
+            "
+          >
+            Qtde.
+          </h5>
         </ion-col>
         <ion-col size="3">
-          <h5 style="font-size: 14px; text-align: center; font-family: 'Poppins-Bold';">Preço</h5>
+          <h5
+            style="
+              font-size: 14px;
+              text-align: center;
+              font-family: 'Poppins-Bold';
+            "
+          >
+            Preço
+          </h5>
         </ion-col>
       </ion-row>
 
-
       <ion-row
-        style="background-color: #e7e7e7; display: flex; align-items: center;"
-        *ngFor="let item of itens"
+        *ngFor="let item of itens; let i = index"
+        [ngClass]="{'bg-gray': i%2 === 0}"
+        style="display: flex; align-items: center; justify-content: center"
       >
         <ion-col size="4">
-          <div style="display: flex; align-items: center;">
-            <img src="../../../assets/iphone_1.png" width="30%" height="30%" />
+          <div style="display: flex; align-items: center">
+            <img
+              [src]="item.produto.fotoEmString != null ? item.produto.fotoEmString : 'assets/sem-imagem.png'"
+              width="30%"
+              height="30%"
+            />
 
-            <div style="font-size: 7px; margin-left: 5px;">
-              <p style="font-size: 14px; line-height: 1px; font-weight: bold;">{{item.produto.modelo}}</p>
-              <p>{{item.produto.descricao}}/p>
+            <div style="font-size: 6px; margin-left: 5px">
+              <span
+                style="font-size: 10px; line-height: 16px; font-weight: bold"
+                >{{item.produto.modelo}}</span
+              >
+              <br />
+              <span>{{item.produto.descricao}}</span>
             </div>
           </div>
         </ion-col>
         <ion-col size="4">
           <h5 style="text-align: center; font-size: 12px">
-            <button style="background-color: transparent;" clear><ion-icon color="medium" style="font-size: 16px;" name="chevron-back-outline"></ion-icon></button>  
+            <button
+              style="background-color: transparent"
+              (click)="decreaseQuantity(item.produto)"
+              clear
+            >
+              <ion-icon
+                color="medium"
+                style="font-size: 16px"
+                name="chevron-back-outline"
+              ></ion-icon>
+            </button>
             {{item.quantidade}}
-            <button style="background-color: transparent;" clear><ion-icon color="medium" style="font-size: 16x;" name="chevron-forward-outline"></ion-icon></button> 
+            <button
+              style="background-color: transparent"
+              (click)="increaseQuantity(item.produto)"
+              clear
+            >
+              <ion-icon
+                color="medium"
+                style="font-size: 16px"
+                name="chevron-forward-outline"
+              ></ion-icon>
+            </button>
           </h5>
         </ion-col>
         <ion-col size="3">
-          <p style="text-align: center; font-size: 12px">R$ {{item.produto.valor}}</p>
+          <p style="text-align: center; font-size: 10px">
+            R$ {{item.produto.valor.toFixed(2)}}
+          </p>
         </ion-col>
         <ion-col size="1">
-          <button style="background-color: transparent;" clear>
-            <ion-icon color="danger" style="font-size: 16px;" name="trash-bin-outline"></ion-icon>
+          <button
+            style="background-color: transparent"
+            (click)="removeProduct(item.produto)"
+            clear
+          >
+            <ion-icon
+              color="danger"
+              style="font-size: 14px"
+              name="trash-bin-outline"
+            ></ion-icon>
           </button>
         </ion-col>
       </ion-row>
-
-
     </ion-grid>
 
-    <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="success">Próximo Passo</ion-button>
-    <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="primary">Continuar Comprando</ion-button>
+    <div *ngIf="total() <= 0">
+      <p style="text-align: center">Seu carrinho está vazio.</p>
+    </div>
+
+    <ion-button
+      class="btn"
+      style="margin: 10px"
+      size="large"
+      expand="block"
+      color="success"
+      [routerLink]="['/terms']"
+      >Próximo Passo</ion-button
+    >
+    <ion-button
+      class="btn"
+      style="margin: 10px"
+      size="large"
+      expand="block"
+      color="primary"
+      (click)="continueShopping()"
+      >Continuar Comprando</ion-button
+    >
   </div>
 </ion-content>

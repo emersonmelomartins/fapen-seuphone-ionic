@@ -1,0 +1,137 @@
+<ion-header>
+  <app-header></app-header>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div classs="container">
+    <ion-toolbar style="z-index: 0">
+      <h2 class="title">Meus Dados</h2>
+    </ion-toolbar>
+
+    <ion-avatar style="text-align: center; margin: 0 auto">
+      <img *ngIf="userInfo !== undefined && userInfo !== '' && userInfo !== null" src="{{userInfo.fotoEmString}}" />
+    </ion-avatar>
+    <br />
+    <input type="file" id="file-input" (change)="loadAvatar($event)"
+    accept="image/png, image/jpeg">
+    <br />
+    <ion-button (click)="updateAvatar()" class="btn" style="margin: 20px 10px;" expand="block" color="success"> Atualizar Avatar </ion-button>
+  </div>
+
+  <ion-list style="text-align: center" [formGroup]="formGroup">
+    <ion-radio-group [(ngModel)]="radioOption" formControlName="radioOption" (ionChange)="radioChange($event)">
+
+
+      <ion-item
+        *ngFor="let opt of options"
+        style="
+          background-color: #cfcfcf;
+          color: #222;
+          border-radius: 10px;
+          border: 1px solid #222;
+          margin-bottom: 5px;
+          width: 33%;
+          height: 50px;
+          display: inline-block;
+          text-align: center;
+          margin: 0 auto;
+        "
+      >
+        <ion-label style="font-size: 12px">{{opt.label}}</ion-label>
+        <ion-radio  color="dark" slot="start" [value]="opt.value"></ion-radio>
+      </ion-item>
+
+    </ion-radio-group>
+  </ion-list>
+
+  <div *ngIf="selectedOption === 1 && userInfo !== '' && userInfo !== undefined" style="margin: auto 20px;">
+    <ion-list lines="none">
+
+      <ion-label class="form-label">Login</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.login}}"
+        disabled
+      ></ion-input>
+
+      <br />
+
+      <ion-label class="form-label">E-mail</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.email}}"
+        disabled
+      ></ion-input>
+      
+    </ion-list>
+  </div>
+
+  <div *ngIf="selectedOption === 2 && userInfo !== '' && userInfo !== undefined" style="margin: auto 20px;">
+    <ion-list lines="none">
+
+      <ion-label class="form-label">Nome</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.pessoa.nome}}"
+        disabled
+      ></ion-input>
+
+      <br />
+
+      <ion-label class="form-label">CPF</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.pessoa.cpf}}"
+        disabled
+      ></ion-input>
+
+      <br />
+
+      <ion-label class="form-label">Data Nascimento</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.pessoa.dtNascimento}}"
+        disabled
+      ></ion-input>
+
+      <br />
+
+      <ion-label class="form-label">Sexo</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.pessoa.sexo}}"
+        disabled
+      ></ion-input>
+
+      <br />
+
+      <ion-label class="form-label">Telefone</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.pessoa.telefone}}"
+        disabled
+      ></ion-input>
+
+      <br />
+
+      <ion-label class="form-label">Celular</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.pessoa.celular}}"
+        disabled
+      ></ion-input>
+      
+    </ion-list>
+  </div>
+
+  <br />
+  <br />
+</ion-content>

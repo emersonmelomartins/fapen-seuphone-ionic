@@ -31,6 +31,22 @@ const routes: Routes = [
     path: 'product-cart',
     loadChildren: () => import('./pages/product-cart/product-cart.module').then( m => m.ProductCartPageModule)
   },
+  {
+    path: 'user-info',
+    loadChildren: () => import('./pages/user-info/user-info.module').then( m => m.UserInfoPageModule)
+  },
+  {
+    path: 'password-recover',
+    loadChildren: () => import('./pages/password-recover/password-recover.module').then( m => m.PasswordRecoverPageModule)
+  },
+  {
+    path: 'confirm-order',
+    loadChildren: () => import('./pages/confirm-order/confirm-order.module').then( m => m.ConfirmOrderPageModule)
+  },
+  {
+    path: 'terms',
+    loadChildren: () => import('./pages/terms/terms.module').then( m => m.TermsPageModule)
+  },
 ];
 
 
