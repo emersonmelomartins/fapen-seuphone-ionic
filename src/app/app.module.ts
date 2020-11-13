@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StorageService } from './services/storage.service';
 import { AuthService } from './services/auth.service';
 import { CartService } from './services/cart.service';
+import { OrderService } from './services/order.service';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { CartService } from './services/cart.service';
     AuthService,
     StorageService,
     CartService,
+    OrderService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

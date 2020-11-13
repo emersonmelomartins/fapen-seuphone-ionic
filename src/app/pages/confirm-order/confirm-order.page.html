@@ -41,10 +41,8 @@
             {{item.quantidade}}
           </h5>
         </ion-col>
-        <ion-col size="3">
+        <ion-col size="4">
           <p class="conteudo-preco-tabela ">R$ {{item.produto.valor}}</p>
-        </ion-col>
-        <ion-col size="1">
         </ion-col>
       </ion-row>
 
@@ -68,9 +66,8 @@
         </ion-list-header>
 
         <ion-select [(ngModel)]="contratoSelect" formControlName="contratoSelect" (ionChange)="tempoContratoSelectChange($event)" value="{{order.tempo_contrato}}" okText="Confirmar" cancelText="Cancelar" placeholder="Mínimo 2 anos...">
+          <ion-select-option value="1">1 Ano</ion-select-option>
           <ion-select-option value="2">2 Anos</ion-select-option>
-          <ion-select-option value="3">3 Anos</ion-select-option>
-          <ion-select-option value="4">4 Anos</ion-select-option>
         </ion-select>
       </ion-list>
 

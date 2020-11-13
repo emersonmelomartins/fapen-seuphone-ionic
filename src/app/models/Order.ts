@@ -4,12 +4,11 @@ import { User } from './User';
 
 export interface Order {
   cart: Cart,
-  condicao_pagamento: number;
-  valor_total: number;
-  data_pedido: string;
-  data_entrega: string;
-  situacao_pedido: string;
-  tempo_contrato: number;
-  id_login: number;
-  endereco: string;
+  condicaoPagamento: string;
+  valorFinal: number;
+  dtPedidoVenda: string;
+  dtEntregaVenda: string;
+  situacaoPedidoVenda: string;
+  tempoContrato: number;
+  usuario: any;
 }

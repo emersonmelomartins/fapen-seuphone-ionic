@@ -1,16 +1,21 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NavController } from "@ionic/angular";
+import { STORAGE_KEYS } from 'src/app/config/storage_keys.config';
 import { CartItem } from "src/app/models/CartItem";
 import { Order } from "src/app/models/Order";
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from "src/app/services/cart.service";
+import { OrderService } from 'src/app/services/order.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: "app-confirm-order",
   templateUrl: "./confirm-order.page.html",
   styleUrls: ["./confirm-order.page.scss"],
 })
-export class ConfirmOrderPage {
+export class ConfirmOrderPage implements OnInit {
   public formGroup: FormGroup;
 
   public condicaoPagamentoOptions = [
@@ -24,34 +29,42 @@ export class ConfirmOrderPage {
     },
   ];
 
+  userInfo: any;
+
   public selectedOption: number;
 
   public itens: CartItem[];
 
-  public order: Order = {
-    cart: this.cartService.getCart(),
-    condicao_pagamento: 0,
-    valor_total: this.total(),
-    data_pedido: new Date().toLocaleDateString(),
-    data_entrega: new Date().toLocaleDateString(),
-    situacao_pedido: "Aguardando Entrega",
-    tempo_contrato: 0,
-    id_login: 1,
-    endereco: "Testando endereço de usuário, aqui vai puxar do usuario",
+  public order = {
+    pedidoVenda: {
+      condicaoPagamento: "CARTAO_CREDITO",
+      valorFinal: this.total(),
+      dtPedidoVenda: new Date(),
+      dtEntregaVenda: new Date(),
+      situacaoPedidoVenda: "AGUARDANDO",
+      tempoContrato: 0,
+      usuario: {}
+    },
+    itensPedidoVenda: this.cartService.getCart().itens
   };
 
   constructor(
     public cartService: CartService,
     public nav: NavController,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public storage: StorageService,
+    public usersService: UsersService,
+    public authService: AuthService,
+    public orderService: OrderService,
+    
   ) {
     this.formGroup = formBuilder.group({
       condicaoRadioOption: [
-        this.order.condicao_pagamento,
+        this.order.pedidoVenda.condicaoPagamento,
         Validators.compose([Validators.required]),
       ],
       contratoSelect: [
-        this.order.tempo_contrato,
+        this.order.pedidoVenda.tempoContrato,
         Validators.compose([Validators.required]),
       ],
     });
@@ -65,6 +78,15 @@ export class ConfirmOrderPage {
     this.cartService.checkCart(cart);
   }
 
+  ngOnInit() {
+    let localUser = this.storage.getLocalUser();
+    if(localUser && localUser.login) {
+        this.authService.findByLogin(localUser.login).subscribe(resp => {
+          this.order.pedidoVenda.usuario = resp;
+        });
+    }
+  }
+
   total(): number {
     return this.cartService.total();
   }
@@ -74,13 +96,20 @@ export class ConfirmOrderPage {
   }
 
   condicaoPagamentoRadioChange(event) {
-    this.order.condicao_pagamento = event.target.value;
+    this.order.pedidoVenda.condicaoPagamento = event.target.value;
   }
   tempoContratoSelectChange(event) {
-    this.order.tempo_contrato = event.target.value;
+    this.order.pedidoVenda.tempoContrato = event.target.value;
   }
 
   orderTest() {
-    console.log(this.order);
+    this.orderService.createOrder(this.order).subscribe(resp => {
+      alert("Pedido realizado com sucesso!");
+      localStorage.removeItem(STORAGE_KEYS.localCart);
+      this.nav.navigateRoot("home");
+    },
+    (error) => {
+      alert("Ocorreu um erro!");
+    });
   }
 }

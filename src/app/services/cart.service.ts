@@ -76,7 +76,7 @@ export class CartService {
     );
 
     if (position == -1) {
-      cart.itens.push({ quantidade: 1, produto: produto });
+      cart.itens.push({ quantidade: 1, produto: produto, valor: produto.valor });
     }
     this.storage.setCart(cart);
 
