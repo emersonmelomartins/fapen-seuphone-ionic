@@ -63,9 +63,9 @@ export class AppComponent {
         icon  : "phone-portrait-outline"
       },
       {
-        title : "Cadastrar",
-        url   : "/sign-up",
-        icon  : "phone-portrait-outline"
+        title : "Meus Pedidos",
+        url   : "/user-orders",
+        icon  : "bag-handle-outline"
       },
       {
         title : "Carrinho",

@@ -21,4 +21,26 @@ export class OrderService {
     
     return this.http.post(`http://localhost:8080/api/pedidos`, order, { 'headers': headers });
   }
+
+  listOrdersByLogin(login) {
+    let token = this.storage.getLocalUser().token;
+    let headers = new HttpHeaders({
+      "Access-Control-Allow-Origin": "DELETE, POST, GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+      "Authorization": "Bearer " + token,
+    });
+    
+    return this.http.get(`http://localhost:8080/api/pedidos/list/${login}`, { 'headers': headers });
+  }
+
+  getOrder(id) {
+    let token = this.storage.getLocalUser().token;
+    let headers = new HttpHeaders({
+      "Access-Control-Allow-Origin": "DELETE, POST, GET, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+      "Authorization": "Bearer " + token,
+    });
+    
+    return this.http.get(`http://localhost:8080/api/pedidos/${id}`, { 'headers': headers });
+  }
 }
