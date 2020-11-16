@@ -1,0 +1,15 @@
+<ion-header>
+  <app-header></app-header>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="form-container">
+    <h3 class="form-title">Pedido realizado com sucesso!</h3>
+    <div class="success-icon">
+      <img src="../../../assets/order-success.png" alt="">
+    </div>
+
+    <ion-button class="btn" expand="block" color="success"> Ir para Pedidos </ion-button>
+    <ion-button [routerLink]="['/home']" class="btn" expand="block" color="success"> Ir para Home </ion-button>
+  </div>
+</ion-content>

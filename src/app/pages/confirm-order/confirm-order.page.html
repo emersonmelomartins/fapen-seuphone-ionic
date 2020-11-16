@@ -10,73 +10,125 @@
     <ion-grid>
       <ion-row>
         <ion-col size="5">
-          <h5 style="font-size: 14px; text-align: center; font-family: 'Poppins-Bold';">Descrição</h5>
+          <h5 class="titulo-tabela">Descrição</h5>
         </ion-col>
         <ion-col size="3">
-          <h5 style="font-size: 14px; text-align: center; font-family: 'Poppins-Bold';">Qtde.</h5>
+          <h5 class="titulo-tabela">Qtde.</h5>
         </ion-col>
         <ion-col size="3">
-          <h5 style="font-size: 14px; text-align: center; font-family: 'Poppins-Bold';">Preço</h5>
+          <h5 class="titulo-tabela">Preço</h5>
         </ion-col>
       </ion-row>
 
 
       <ion-row
       *ngFor="let item of itens; let i = index"
-      [ngClass]="{'bg-gray': i%2 === 0}"style="display: flex; align-items: center; justify-content: center;"
+      [ngClass]="{'bg-gray': i%2 === 0}" class="linha-tabela"
       >
         <ion-col size="4">
-          <div style="display: flex; align-items: center;">
+          <div class="conteudo-foto-tabela">
             <img [src]="item.produto.fotoEmString != null ? item.produto.fotoEmString : 'assets/sem-imagem.png'" width="30%" height="30%" />
 
-            <div style="font-size: 6px; margin-left: 5px;">
-              <span style="font-size: 10px; line-height: 16px; font-weight: bold;">{{item.produto.modelo}}</span>
+            <div class="conteudo-descricao-tabela">
+              <span class="conteudo-descricao-texto-tabela">{{item.produto.modelo}}</span>
               <br/>
               <span>{{item.produto.descricao}}</span>
             </div>
           </div>
         </ion-col>
         <ion-col size="4">
-          <h5 style="text-align: center; font-size: 12px">
+          <h5 class="conteudo-quantidade-tabela">
             {{item.quantidade}}
           </h5>
         </ion-col>
-        <ion-col size="3">
-          <p style="text-align: center; font-size: 10px">R$ {{item.produto.valor}}</p>
-        </ion-col>
-        <ion-col size="1">
+        <ion-col size="4">
+          <p class="conteudo-preco-tabela ">R$ {{item.produto.valor}}</p>
         </ion-col>
       </ion-row>
 
     </ion-grid>
 
-    <ion-list style="text-align: center;">
+    <br />
+
+      <div class="margin-left-15">
+        <ion-label class="titulo-label-div">Endereço</ion-label>
+        <p class="texto-div">
+          {{order.endereco}}
+        </p>
+      </div>
+
+
+      <ion-list class="center-align" required [formGroup]="formGroup">
         <ion-list-header>
-          <ion-label style="text-align: left; font-weight: bold;">Endereço</ion-label>
+          <ion-label class="titulo-label-div"
+            >Duração do Contrato</ion-label
+          >
         </ion-list-header>
-        <ion-item style="font-size: 14px;">Av. Alguma coisa, 299 - Santo André/SP - 09110000</ion-item>
-    </ion-list>
 
-    <ion-list style="text-align: center;">
-      <ion-radio-group value="metodo_pagamento">
-        <ion-list-header>
-          <ion-label style="text-align: left; font-weight: bold;">Método de Pagamento</ion-label>
-        </ion-list-header>
+        <ion-select [(ngModel)]="contratoSelect" formControlName="contratoSelect" (ionChange)="tempoContratoSelectChange($event)" value="{{order.tempo_contrato}}" okText="Confirmar" cancelText="Cancelar" placeholder="Mínimo 2 anos...">
+          <ion-select-option value="1">1 Ano</ion-select-option>
+          <ion-select-option value="2">2 Anos</ion-select-option>
+        </ion-select>
+      </ion-list>
+
+      <ion-list class="center-align" required [formGroup]="formGroup">
+        <ion-radio-group [(ngModel)]="condicaoRadioOption" formControlName="condicaoRadioOption" (ionChange)="condicaoPagamentoRadioChange($event)">
+          <ion-list-header>
+            <ion-label class="titulo-label-div"
+              >Condição de Pagamento</ion-label
+            >
+          </ion-list-header>
+  
+  
+          <ion-item
+            *ngFor="let opt of condicaoPagamentoOptions"
+            class="ion-radio-custom"
+          >
+            <ion-label style="font-size: 14px">{{opt.label}}</ion-label>
+            <ion-radio  color="dark" slot="start" [value]="opt.value"></ion-radio>
+          </ion-item>
+  
+        </ion-radio-group>
+      </ion-list>
+
+      <div *ngIf="order.condicao_pagamento === 1" style="margin: auto 20px;">
+        <ion-list lines="none">
     
-        <ion-item style="background-color: #cfcfcf; color: #222; border-radius: 10px; border: 1px solid #222; margin-bottom: 5px; width: 46%; height: 50px; display: inline-block; text-align: center; margin: 0 auto;">
-          <ion-label style="font-size: 14px;">Cartão Créd.</ion-label>
-          <ion-radio color="dark" slot="start" value="cartao"></ion-radio>
-        </ion-item>
-
-        <span style="padding:4px;"></span>
+          <ion-label class="form-label">Número Cartão</ion-label>
+          <ion-input
+            class="form-input"
+            type="text"
+          ></ion-input>
     
-        <ion-item style="background-color: #cfcfcf; color: #222; border-radius: 10px; border: 1px solid #222; margin-bottom: 5px; width: 46%; height: 50px; display: inline-block; text-align: center; margin: 0 auto;">
-          <ion-label style="font-size: 14px;">Boleto</ion-label>
-          <ion-radio color="dark" slot="start" value="boleto"></ion-radio>
-        </ion-item>
+          <br />
+    
+          <ion-label class="form-label">Nome</ion-label>
+          <ion-input
+            class="form-input"
+            type="text"
+          ></ion-input>
 
-      </ion-radio-group>
-    </ion-list>
+          <br />
+    
+          <ion-label class="form-label">Data Vencimento</ion-label>
+          <ion-input
+            class="form-input"
+            type="text"
+          ></ion-input>
+
+          <br />
+    
+          <ion-label class="form-label">CVV</ion-label>
+          <ion-input
+            class="form-input"
+            type="text"
+          ></ion-input>
+          
+        </ion-list>
+      </div>
+
+      
+      
 
     <div style="margin-left: 15px;">
       <ion-label style="text-align: left; font-weight: bold;">Resumo do Pedido</ion-label>
@@ -87,6 +139,9 @@
         Frete: 2 --- R$ 1111,00
       </p>
       <p style="font-size: 12px;">
+        Parcelas: 24x --- R$ 222,00
+      </p>
+      <p style="font-size: 12px;">
         TOTAL: --- <b>R$ {{total()}}</b>
       </p>
 
@@ -94,7 +149,7 @@
     </div>
 
 
-    <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="success">Finalizar Compra</ion-button>
+    <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="success" (click)="orderTest()">Finalizar Compra</ion-button>
     <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="danger" (click)="goBack()">Voltar</ion-button>
   </div>
 </ion-content>

@@ -1,0 +1,114 @@
+<ion-header>
+  <app-header></app-header>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div classs="container">
+    <ion-toolbar style="z-index: 0">
+      <h2 class="title">Pedido {{order.idPedidoVenda}}</h2>
+    </ion-toolbar>
+
+    <ion-list *ngIf="order !== undefined && order !== '' && order !== null">
+      <ion-item>
+        Data Pedido: {{order.dtPedidoVenda}}
+      </ion-item>
+      <ion-item>
+        Data Entrega: {{order.dtEntregaVenda}}
+      </ion-item>
+      <ion-item>
+        Situação: {{order.situacaoPedidoVenda}}
+      </ion-item>
+      <ion-item>
+        Condição Pagamento: {{order.condicaoPagamento}}
+      </ion-item>
+      <ion-item>
+        Valor Total: {{order.valorFinal}}
+      </ion-item>
+      <ion-item>
+        Tempo de Contrato: {{order.tempoContrato}}
+      </ion-item>
+
+    </ion-list>
+
+    
+    <ion-grid *ngIf="order !== undefined && order !== '' && order !== null">
+      <ion-row>
+        <ion-col size="5">
+          <h5
+            style="
+              font-size: 14px;
+              text-align: center;
+              font-family: 'Poppins-Bold';
+            "
+          >
+            Descrição
+          </h5>
+        </ion-col>
+        <ion-col size="3">
+          <h5
+            style="
+              font-size: 14px;
+              text-align: center;
+              font-family: 'Poppins-Bold';
+            "
+          >
+            Qtde.
+          </h5>
+        </ion-col>
+        <ion-col size="3">
+          <h5
+            style="
+              font-size: 14px;
+              text-align: center;
+              font-family: 'Poppins-Bold';
+            "
+          >
+            Preço
+          </h5>
+        </ion-col>
+      </ion-row>
+
+      <ion-row
+        *ngFor="let item of order.itens; let i = index"
+        [ngClass]="{'bg-gray': i%2 === 0}"
+        style="display: flex; align-items: center; justify-content: center"
+      >
+        <ion-col size="4">
+          <div style="display: flex; align-items: center">
+            <img
+              [src]="item.produto.fotoEmString != null ? item.produto.fotoEmString : 'assets/sem-imagem.png'"
+              width="30%"
+              height="30%"
+            />
+
+            <div style="font-size: 6px; margin-left: 5px">
+              <span
+                style="font-size: 10px; line-height: 16px; font-weight: bold"
+                >{{item.produto.modelo}}</span
+              >
+              <br />
+              <span>{{item.produto.descricao}}</span>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col size="4">
+          <h5 style="text-align: center; font-size: 12px">
+
+            {{item.quantidade}}
+
+          </h5>
+        </ion-col>
+        <ion-col size="3">
+          <p style="text-align: center; font-size: 10px">
+            R$ {{item.produto.valor.toFixed(2)}}
+          </p>
+        </ion-col>
+        
+      </ion-row>
+    </ion-grid>
+    
+  </div>
+
+  <br />
+  <br />
+</ion-content>
