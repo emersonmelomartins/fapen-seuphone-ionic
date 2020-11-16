@@ -1,3 +1,4 @@
+import { FormCadastro } from './../models/User';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User, UserAuthLogin } from '../models/User';
@@ -14,8 +15,8 @@ export class UsersService {
 
   
 
-  createUser(user: User) {
-    return this.http.post(`http://localhost:8080/api/usuarios/criarUsuarios`, user);
+  createUser(form: FormCadastro) {
+    return this.http.post(`http://localhost:8080/api/usuarios/criarUsuario`, form);
   }
 
   updateAvatar(userInfo) {

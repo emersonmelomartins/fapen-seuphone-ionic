@@ -1,3 +1,5 @@
+import { NavController } from '@ionic/angular';
+import { Perfil, UserAuthLogin, FormCadastro } from './../../models/User';
 import { UsersService } from 'src/app/services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
@@ -11,138 +13,147 @@ import { User, Pessoa, Endereco} from 'src/app/models/User';
 export class SignUpPage implements OnInit {
 
   public formGroup: FormGroup;
-  
-    public endereco: Endereco = {
-      cep: "" ,
-      logradouro: "" ,
-      numero: "" ,
-      bairro: "" ,
-      cidade: "" ,
-      uf: "",
-      complemento: "",
-    }
-  
-  public pessoa: Pessoa = {
-    nome: "",
-    endereco: this.endereco,
-    cpf: "",
-    dtNascimento: "",
-    sexo: "",
-    celular: "",
-    telefone: ""
+
+  public form: FormCadastro = {
+    usuario: {
+      login: "",
+      senha: "",
+      email: "",
+      pessoa: {
+        nome: "",
+        cpf: "",
+        dtNascimento: "",
+        sexo: "",
+        celular: "",
+        telefone: "",
+              endereco: {
+            uf: "",
+            cidade: "",
+            logradouro: "",
+            bairro: "",
+            cep: "",
+            complemento: "",
+            numero: 0, 
+          }
+      }
+    },
+    confirmaSenha: "",
+    listaPerfil: 
+       [ {
+          authority: "ROLE_CLIENT",
+          descricao: "Cliente do aplicativo"
+        }]
+      
   }
 
-  public user: User = {
-    pessoa: this.pessoa,
-    login: "",
-    senha: "",
-    confirmarSenha: "",
-    email: "",
-  }
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UsersService
+    private userService: UsersService,
+    private navController: NavController,
     ) {
     
     this.formGroup = formBuilder.group({
       login: [
-        this.user.login,
+        this.form.usuario.login,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
       senha: [
-        this.user.senha,
+        this.form.usuario.senha,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
       confirmarSenha: [
-        this.user.confirmarSenha,
+        this.form.confirmaSenha,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
-          this.validatePassword
+          //this.validatePassword
         ]),
       ],
       email: [
-        this.user.email,
+        this.form.usuario.email,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
       nome: [
-        this.pessoa.nome,
+        this.form.usuario.pessoa.nome,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
       dtNascimento: [
-        this.pessoa.dtNascimento,
+        this.form.usuario.pessoa.dtNascimento,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
       sexo: [
-        this.pessoa.sexo,
+        this.form.usuario.pessoa.sexo,
         Validators.compose([
           Validators.required,
         ]),
       ],
       cpf: [
-        this.pessoa.cpf,
+        this.form.usuario.pessoa.cpf,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
       cep: [
-        this.endereco.cep,
+        this.form.usuario.pessoa.endereco.cep,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
       logradouro: [
-        this.endereco.logradouro,
+        this.form.usuario.pessoa.endereco.logradouro,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
-      number: [
-        this.endereco.numero,
+      numero: [
+        this.form.usuario.pessoa.endereco.numero,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
-      neighborhood: [
-        this.endereco.bairro,
+      bairro: [
+        this.form.usuario.pessoa.endereco.bairro,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
-      city: [
-        this.endereco.cidade,
+      cidade: [
+        this.form.usuario.pessoa.endereco.cidade,
         Validators.compose([
           Validators.required,
           Validators.minLength(1),
         ]),
       ],
       uf: [
-        this.endereco.uf,
+        this.form.usuario.pessoa.endereco.uf,
         Validators.compose([
           Validators.required,
         ]),
       ],
+      celular: this.form.usuario.pessoa.celular,
+      telefone: this.form.usuario.pessoa.telefone,
+      complemento: this.form.usuario.pessoa.endereco.complemento
       
     });
 
@@ -151,20 +162,19 @@ export class SignUpPage implements OnInit {
   ngOnInit() {
   }
 
-  validatePassword = (confirmPassword: FormControl): ValidatorFn => {
-    console.log(confirmPassword.value); 
-    if (this.formGroup) {
-      console.log(this.formGroup.get('senha').value);
-    }
-    return null;
-  }
+  // validatePassword = (confirmPassword: FormControl): ValidatorFn => {
+    
+  //   if (this.formGroup) {
+  //     console.log(this.formGroup.get('senha').value);
+  //   }
+  //   return null;
+  // }
 
 
   handleCadastrar() {
-    console.log(this.formGroup.getRawValue());
-    this.userService.createUser(this.user).subscribe(
+    this.userService.createUser(this.form).subscribe(
       (data) => {
-        location.reload();
+        this.navController.navigateRoot("login");
       },
       (error) => {
         console.log("Ocorreu um Erro!", error);
