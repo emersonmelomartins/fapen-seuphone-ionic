@@ -3,13 +3,14 @@ export interface User {
   pessoa: Pessoa,
   login: string,
   senha: string,
-  confirmarSenha?: string,
   email: string,
   caminhoFoto?: string,
   inativo?: boolean,
+  
 }
 export interface Pessoa {
   idPessoa?: number,
+  endereco: Endereco,
   nome: string,
   cpf: string,
   dtNascimento: string,
@@ -22,11 +23,22 @@ export interface Endereco {
   idEndereco?: number,
   cep: string ,
   logradouro: string ,
-  numero: string ,
+  numero: number ,
   bairro: string ,
   cidade: string ,
   uf: string,
   complemento?: string,
+}
+
+export interface FormCadastro {
+  usuario: User
+  confirmaSenha?: string,
+  listaPerfil: Perfil[]
+}
+
+export interface Perfil {
+  authority: string,
+  descricao: string
 }
 
 export interface UserAuthLogin {

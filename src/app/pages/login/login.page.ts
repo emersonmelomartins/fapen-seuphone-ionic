@@ -1,3 +1,4 @@
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -22,13 +23,21 @@ export class LoginPage implements OnInit {
     password: "",
   };
 
+  public resultado: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private usersService: UsersService,
     private authService: AuthService,
     private nav: NavController,
-    private storage: StorageService
+    private storage: StorageService,
+    private activatedRoute: ActivatedRoute,
   ) {
+    this.activatedRoute.paramMap.subscribe((param: ParamMap) => {
+      if(param.get("cadastro") === "sucesso"){
+        this.resultado = true
+      }      
+    })
     this.formGroup = formBuilder.group({
       username: [
         this.user.username,

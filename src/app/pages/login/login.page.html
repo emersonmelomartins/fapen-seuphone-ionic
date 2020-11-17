@@ -3,43 +3,63 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <div *ngIf="resultado === true" style="margin: 20px"></div>
   <div class="form-container">
     <form action="" [formGroup]="formGroup">
-        <ion-toolbar style="z-index: 0">
-          <h2 class="form-title">Login</h2>
-        </ion-toolbar>
-        <ion-list lines="none">
-          <ion-label  class="form-label">Usuário</ion-label>
-          <ion-input [(ngModel)]="user.username" formControlName="username" placeholder="Ex: joao123" class="form-input" type="text"></ion-input>
-          <div
-            *ngIf="!formGroup.controls.username.valid &&
+      <ion-toolbar style="z-index: 0">
+        <h2 class="form-title">Login</h2>
+      </ion-toolbar>
+      <ion-list lines="none">
+        <ion-label class="form-label">Usuário</ion-label>
+        <ion-input
+          [(ngModel)]="user.username"
+          formControlName="username"
+          placeholder="Ex: joao123"
+          class="form-input"
+          type="text"
+        ></ion-input>
+        <div
+          *ngIf="!formGroup.controls.username.valid &&
             formGroup.controls.username.dirty"
-            class="validator-error"
-          >
-            *Login obrigatório.
-          </div>
-        </ion-list>
-        
-        
-        <ion-list lines="none">
-          <ion-label position="stacked" class="form-label">Senha</ion-label>
-          <ion-input [(ngModel)]="user.password" formControlName="password" placeholder="*******" class="form-input" type="password"></ion-input>
-          <div
-            *ngIf="!formGroup.controls.password.valid &&
+          class="validator-error"
+        >
+          *Login obrigatório.
+        </div>
+      </ion-list>
+
+      <ion-list lines="none">
+        <ion-label position="stacked" class="form-label">Senha</ion-label>
+        <ion-input
+          [(ngModel)]="user.password"
+          formControlName="password"
+          placeholder="*******"
+          class="form-input"
+          type="password"
+        ></ion-input>
+        <div
+          *ngIf="!formGroup.controls.password.valid &&
             formGroup.controls.password.dirty"
-            class="validator-error"
-          >
-            *Senha obrigatória.
-          </div>
-        </ion-list>
-        <ion-list lines="none">
-          <a [routerLink]="['/sign-up']">+ Novo cadastro</a>
-          <br /><br />
-          <a [routerLink]="['/password-recover']">Esqueci minha senha</a>
-          <br />
-        </ion-list>
-        
-        <ion-button class="btn" [disabled]="!formGroup.valid" (click)="doLogin()" expand="block" color="success"> ENTRAR </ion-button>
+          class="validator-error"
+        >
+          *Senha obrigatória.
+        </div>
+      </ion-list>
+      <ion-list lines="none">
+        <a [routerLink]="['/sign-up']">+ Novo cadastro</a>
+        <br /><br />
+        <a [routerLink]="['/password-recover']">Esqueci minha senha</a>
+        <br />
+      </ion-list>
+
+      <ion-button
+        class="btn"
+        [disabled]="!formGroup.valid"
+        (click)="doLogin()"
+        expand="block"
+        color="success"
+      >
+        ENTRAR
+      </ion-button>
     </form>
   </div>
 </ion-content>
