@@ -8,29 +8,37 @@
       <h2 class="title">Meus Pedidos</h2>
     </ion-toolbar>
 
-
-
-  
-
     <ion-card class="order-card" *ngFor="let order of orders;">
-      <a [routerLink]="['/order-info/' + order.idPedidoVenda]" style="text-decoration: none;" >
-      <ion-card-header style="display: inline-flex; align-items: center;">
-        <div>
-          <ion-card-subtitle style="font-size: 10px; color: #585858">N° {{order.idPedidoVenda}}</ion-card-subtitle>
-          <ion-card-title>
-            <span style="color: rgb(9, 180, 9); font-size: 12px;">{{order.situacaoPedidoVenda}}</span>
-          </ion-card-title>
-          <ion-card-subtitle style="font-size: 8px; color: #585858">Pedido efetuado em {{order.dtPedidoVenda}}</ion-card-subtitle>
-        </div>
+      <a
+        [routerLink]="['/order-info/' + order.idPedidoVenda]"
+        style="text-decoration: none"
+      >
+        <ion-card-header style="display: inline-flex; align-items: center">
+          <div>
+            <ion-card-subtitle style="font-size: 10px; color: #585858"
+              >N° {{order.idPedidoVenda}}</ion-card-subtitle
+            >
+            <ion-card-title>
+              <span style="color: rgb(9, 180, 9); font-size: 12px"
+                >{{order.situacaoPedidoVenda}}</span
+              >
+            </ion-card-title>
+            <ion-card-subtitle style="font-size: 8px; color: #585858"
+              >Pedido efetuado em {{order.dtPedidoVenda}}</ion-card-subtitle
+            >
+          </div>
 
-        <div>
-          <span style="font-size: 10px; color: #585858">R$ 1999,99</span>
-        </div>
-        <ion-icon style="font-size: 20px; color: rgba(0, 0, 0, 0.300);" name="chevron-forward-outline"></ion-icon>
+          <div>
+            <span style="font-size: 10px; color: #585858">R$ 1999,99</span>
+          </div>
+          <ion-icon
+            style="font-size: 20px; color: rgba(0, 0, 0, 0.3)"
+            name="chevron-forward-outline"
+          ></ion-icon>
         </ion-card-header>
       </a>
     </ion-card>
-     
-  <br />
+
+    <br />
   </div>
 </ion-content>

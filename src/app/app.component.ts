@@ -72,6 +72,11 @@ export class AppComponent {
         url   : "/product-cart",
         icon  : "cart-outline"
       },
+      {
+        title : "Como funciona",
+        url   : "/leasing-info",
+        icon  : "help-circle-outline"
+      },
     ]
   }
 

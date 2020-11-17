@@ -5,41 +5,32 @@
 <ion-content [fullscreen]="true">
   <div id="container">
     <a href="">
-      <img src="../../../assets/best_seller_bg.png" alt="Mais Vendidos">
+      <img src="../../../assets/best_seller_bg.png" alt="Mais Vendidos" />
     </a>
 
     <br />
 
-    <h3 style="text-align: left;">Conheça as novidades</h3>
+    <h3 style="text-align: left">Conheça as novidades</h3>
     <app-product-slide></app-product-slide>
 
     <br />
 
-    <h3 style="text-align: left;">Nossos produtos</h3>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title style="font-size: 16px;">
+          O que é Leasing?
+        </ion-card-title>
+      </ion-card-header>
 
-    <ion-card class="product-card">
+        <ion-card-content>
+          <p>
+            O <b>Leasing</b> seria resumidamente um aluguel, no nosso caso
+              esse aluguel seria uma
+              <b>locação de iphones</b>...
+          </p>
 
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <img class="banner-home" src="../../../assets/iphone_2.png" width="80%" />
-          </ion-col>
-          <ion-col>
-            <div>
-              <h3 class="product-card-title">IPhone 11</h3>
-            </div>
-            <div>
-              <p class="product-card-text">Midnight Green - 128GB</p>
-              <p class="product-card-text"><sup>R$</sup> <span style="color: #2e4ea1; font-size: 24px;"> 1999,00</span></p>
-            </div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-button class="btn" color="success" expand="block">Ver Produto</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+          <a [routerLink]="['/leasing-info']" color="success">+ Quero saber mais</a>
+        </ion-card-content>
 
     </ion-card>
 
