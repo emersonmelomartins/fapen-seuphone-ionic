@@ -70,6 +70,12 @@ export class ConfirmOrderPage implements OnInit {
     });
   }
 
+  ionViewWillEnter() {
+    if(this.storage.getLocalUser() === null) {
+      this.nav.navigateRoot("login");
+    }
+   }
+
   ionViewDidEnter() {
     let cart = this.cartService.getCart();
 
