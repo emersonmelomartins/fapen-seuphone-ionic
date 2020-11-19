@@ -9,19 +9,36 @@
     </ion-toolbar>
 
     <ion-avatar style="text-align: center; margin: 0 auto">
-      <img *ngIf="userInfo !== undefined && userInfo !== '' && userInfo !== null" src="{{userInfo.fotoEmString}}" />
+      <img
+        *ngIf="userInfo !== undefined && userInfo !== '' && userInfo !== null"
+        src="{{userInfo.fotoEmString}}"
+      />
     </ion-avatar>
     <br />
-    <input type="file" id="file-input" (change)="loadAvatar($event)"
-    accept="image/png, image/jpeg">
+    <input
+      type="file"
+      id="file-input"
+      (change)="loadAvatar($event)"
+      accept="image/png, image/jpeg"
+    />
     <br />
-    <ion-button (click)="updateAvatar()" class="btn" style="margin: 20px 10px;" expand="block" color="success"> Atualizar Avatar </ion-button>
+    <ion-button
+      (click)="updateAvatar()"
+      class="btn"
+      style="margin: 20px 10px"
+      expand="block"
+      color="success"
+    >
+      Atualizar Avatar
+    </ion-button>
   </div>
 
   <ion-list style="text-align: center" [formGroup]="formGroup">
-    <ion-radio-group [(ngModel)]="radioOption" formControlName="radioOption" (ionChange)="radioChange($event)">
-
-
+    <ion-radio-group
+      [(ngModel)]="radioOption"
+      formControlName="radioOption"
+      (ionChange)="radioChange($event)"
+    >
       <ion-item
         *ngFor="let opt of options"
         style="
@@ -37,16 +54,19 @@
           margin: 0 auto;
         "
       >
-        <ion-label style="font-size: 12px">{{opt.label}}</ion-label>
-        <ion-radio  color="dark" slot="start" [value]="opt.value"></ion-radio>
+        <ion-label style="font-size: 24px"
+          ><ion-icon name="{{opt.icon}}"></ion-icon
+        ></ion-label>
+        <ion-radio color="dark" slot="start" [value]="opt.value"></ion-radio>
       </ion-item>
-
     </ion-radio-group>
   </ion-list>
 
-  <div *ngIf="selectedOption === 1 && userInfo !== '' && userInfo !== undefined" style="margin: auto 20px;">
+  <div
+    *ngIf="selectedOption === 1 && userInfo !== '' && userInfo !== undefined"
+    style="margin: auto 20px"
+  >
     <ion-list lines="none">
-
       <ion-label class="form-label">Login</ion-label>
       <ion-input
         class="form-input"
@@ -64,13 +84,14 @@
         value="{{userInfo.email}}"
         disabled
       ></ion-input>
-      
     </ion-list>
   </div>
 
-  <div *ngIf="selectedOption === 2 && userInfo !== '' && userInfo !== undefined" style="margin: auto 20px;">
+  <div
+    *ngIf="selectedOption === 2 && userInfo !== '' && userInfo !== undefined"
+    style="margin: auto 20px"
+  >
     <ion-list lines="none">
-
       <ion-label class="form-label">Nome</ion-label>
       <ion-input
         class="form-input"
@@ -128,10 +149,79 @@
         value="{{userInfo.pessoa.celular}}"
         disabled
       ></ion-input>
-      
     </ion-list>
   </div>
 
-  <br />
+  <div
+    *ngIf="selectedOption === 3 && userInfo !== '' && userInfo !== undefined"
+    style="margin: auto 20px"
+  >
+    <ion-list lines="none">
+      <ion-label class="form-label">Logradouro</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.pessoa.endereco.logradouro}}"
+        disabled
+      ></ion-input>
+
+      <br />
+
+      <ion-label class="form-label">Bairro</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.pessoa.endereco.bairro}}"
+        disabled
+      ></ion-input>
+
+      <br />
+
+      <ion-label class="form-label">Cidade</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.pessoa.endereco.cidade}}"
+        disabled
+      ></ion-input>
+
+      <br />
+
+      <ion-label class="form-label">UF</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.pessoa.endereco.uf}}"
+        disabled
+      ></ion-input>
+
+      <br />
+
+
+      <ion-label class="form-label">CEP</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.pessoa.endereco.cep}}"
+        disabled
+      ></ion-input>
+
+      <br />
+
+
+      <ion-label class="form-label">Complemento</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        value="{{userInfo.pessoa.endereco.complemento}}"
+        disabled
+      ></ion-input>
+
+      <br />
+
+
+    </ion-list>
+  </div>
+
   <br />
 </ion-content>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { NavController } from "@ionic/angular";
+import { NavController, ToastController } from "@ionic/angular";
 import { STORAGE_KEYS } from 'src/app/config/storage_keys.config';
 import { CartItem } from "src/app/models/CartItem";
 import { Order } from "src/app/models/Order";
@@ -21,26 +21,43 @@ export class ConfirmOrderPage implements OnInit {
   public condicaoPagamentoOptions = [
     {
       label: "Cartão Cred.",
-      value: 1,
+      value: "CARTAO_CREDITO",
     },
     {
       label: "Boleto",
-      value: 2,
+      value: "BOLETO",
     },
   ];
 
+  public parcelas = [
+    {
+      numeroParcelas: 12,
+      valorParcelas: (this.total()/12).toFixed(2),
+    },
+    {
+      numeroParcelas: 24,
+      valorParcelas: (this.total()/24).toFixed(2),
+    }
+  ]
+
   userInfo: any;
+
+  userAddress: string;
 
   public selectedOption: number;
 
   public itens: CartItem[];
 
+  public today = new Date();
+
+  public todayPlus20 = new Date(this.today.getDate() + 20);
+
   public order = {
     pedidoVenda: {
-      condicaoPagamento: "CARTAO_CREDITO",
+      condicaoPagamento: "",
       valorFinal: this.total(),
-      dtPedidoVenda: new Date(),
-      dtEntregaVenda: new Date(),
+      dtPedidoVenda: this.today,
+      dtEntregaVenda: this.todayPlus20,
       situacaoPedidoVenda: "AGUARDANDO",
       tempoContrato: 0,
       usuario: {}
@@ -56,7 +73,7 @@ export class ConfirmOrderPage implements OnInit {
     public usersService: UsersService,
     public authService: AuthService,
     public orderService: OrderService,
-    
+    public toastController: ToastController
   ) {
     this.formGroup = formBuilder.group({
       condicaoRadioOption: [
@@ -88,6 +105,8 @@ export class ConfirmOrderPage implements OnInit {
     let localUser = this.storage.getLocalUser();
     if(localUser && localUser.login) {
         this.authService.findByLogin(localUser.login).subscribe(resp => {
+          this.userAddress = `${resp.pessoa.endereco.logradouro} - ${resp.pessoa.endereco.bairro} - ${resp.pessoa.endereco.cidade}/${resp.pessoa.endereco.uf} - ${resp.pessoa.endereco.cep}`;
+
           this.order.pedidoVenda.usuario = resp;
         });
     }
@@ -108,13 +127,36 @@ export class ConfirmOrderPage implements OnInit {
     this.order.pedidoVenda.tempoContrato = event.target.value;
   }
 
-  orderTest() {
+  async errorToast(message) {
+    const toast = await this.toastController.create({
+      color: 'danger',
+      position: 'top',
+      header: 'ERROR!',
+      message: message,
+      duration: 3000
+    });
+    toast.present();
+  }
+
+  async successToast(message) {
+    const toast = await this.toastController.create({
+      color: 'success',
+      position: 'top',
+      header: 'SUCESSO!',
+      message: message,
+      duration: 3000
+    });
+    toast.present();
+  }
+
+  createOrder() {
+    console.log(this.order);
     this.orderService.createOrder(this.order).subscribe(resp => {
       localStorage.removeItem(STORAGE_KEYS.localCart);
       this.nav.navigateRoot("order-success");
     },
     (error) => {
-      alert("Ocorreu um erro!");
+      this.errorToast("Ocorreu um erro!");
     });
   }
 }

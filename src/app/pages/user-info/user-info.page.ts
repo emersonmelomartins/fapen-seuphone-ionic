@@ -24,15 +24,15 @@ export class UserInfoPage implements OnInit {
 
   public options = [
     {
-      label: 'Login',
+      icon: 'log-in-outline',
       value: 1
     },
     {
-      label: 'Pessoa',
+      icon: 'person-outline',
       value: 2
     },
     {
-      label: 'Endereço',
+      icon: 'home-outline',
       value: 3
     }
   ];

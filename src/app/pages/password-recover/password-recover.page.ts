@@ -69,8 +69,7 @@ export class PasswordRecoverPage implements OnInit {
   async recoverPassword() {
      await this.showLoading('recoverPassword');
 
-    this.usersService.checkRecoverEmail(this.user).subscribe(resp => {
-      console.log(resp.message);
+    this.usersService.recoverPassword(this.user).subscribe(resp => {
         this.dismissLoader('recoverPassword');
         this.successToast(resp.message);
       },

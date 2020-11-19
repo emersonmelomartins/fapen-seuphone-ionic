@@ -42,7 +42,7 @@
           </h5>
         </ion-col>
         <ion-col size="4">
-          <p class="conteudo-preco-tabela ">R$ {{item.produto.valor}}</p>
+          <p class="conteudo-preco-tabela ">R$ {{item.produto.valor.toFixed(2)}}</p>
         </ion-col>
       </ion-row>
 
@@ -50,24 +50,24 @@
 
     <br />
 
-      <div class="margin-left-15">
+      <div class="margin-left-15" *ngIf="order.pedidoVenda.usuario !== '' && order.pedidoVenda.usuario !== null && order.pedidoVenda.usuario !== undefined">
         <ion-label class="titulo-label-div">Endereço</ion-label>
         <p class="texto-div">
-          {{order.endereco}}
+          {{userAddress}}
         </p>
       </div>
 
 
-      <ion-list class="center-align" required [formGroup]="formGroup">
+      <ion-list required [formGroup]="formGroup">
         <ion-list-header>
           <ion-label class="titulo-label-div"
             >Duração do Contrato</ion-label
           >
         </ion-list-header>
 
-        <ion-select [(ngModel)]="contratoSelect" formControlName="contratoSelect" (ionChange)="tempoContratoSelectChange($event)" value="{{order.tempo_contrato}}" okText="Confirmar" cancelText="Cancelar" placeholder="Mínimo 2 anos...">
-          <ion-select-option value="1">1 Ano</ion-select-option>
-          <ion-select-option value="2">2 Anos</ion-select-option>
+        <ion-select [(ngModel)]="contratoSelect" formControlName="contratoSelect" (ionChange)="tempoContratoSelectChange($event)" value="{{order.tempo_contrato}}" okText="Confirmar" cancelText="Cancelar" placeholder="Escolha a duração do contrato...">
+          <ion-select-option value="1">1 ano</ion-select-option>
+          <ion-select-option value="2">2 anos</ion-select-option>
         </ion-select>
       </ion-list>
 
@@ -91,7 +91,7 @@
         </ion-radio-group>
       </ion-list>
 
-      <div *ngIf="order.condicao_pagamento === 1" style="margin: auto 20px;">
+      <div *ngIf="order.pedidoVenda.condicaoPagamento === 'CARTAO_CREDITO'" style="margin: auto 20px;">
         <ion-list lines="none">
     
           <ion-label class="form-label">Número Cartão</ion-label>
@@ -133,23 +133,28 @@
     <div style="margin-left: 15px;">
       <ion-label style="text-align: left; font-weight: bold;">Resumo do Pedido</ion-label>
       <p style="font-size: 12px;">
-        Total de Produtos: 2 --- R$ 1111,00
+        Total de Produtos: {{order.itensPedidoVenda.length}}
+      </p>
+      <p style="font-size: 12px;" *ngIf="order.pedidoVenda.condicaoPagamento === 'CARTAO_CRED'">
+        <span *ngIf="order.pedidoVenda.tempoContrato === '1'">
+          Parcelas: {{parcelas[0].numeroParcelas}}x de R$ <b>{{parcelas[0].valorParcelas}}</b>
+        </span>
+
+        <span *ngIf="order.pedidoVenda.tempoContrato === '2'">
+          Parcelas: {{parcelas[1].numeroParcelas}}x de R$ <b>{{parcelas[1].valorParcelas}}</b>
+        </span>
+        
+
       </p>
       <p style="font-size: 12px;">
-        Frete: 2 --- R$ 1111,00
-      </p>
-      <p style="font-size: 12px;">
-        Parcelas: 24x --- R$ 222,00
-      </p>
-      <p style="font-size: 12px;">
-        TOTAL: --- <b>R$ {{total()}}</b>
+        Total: <b>R$ {{total().toFixed(2)}}</b>
       </p>
 
 
     </div>
 
 
-    <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="success" (click)="orderTest()">Finalizar Compra</ion-button>
+    <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="success" (click)="createOrder()">Finalizar Compra</ion-button>
     <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="danger" (click)="goBack()">Voltar</ion-button>
   </div>
 </ion-content>

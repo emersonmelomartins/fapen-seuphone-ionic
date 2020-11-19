@@ -23,6 +23,13 @@ ion-avatar {
 ion-radio {
   padding: 0;
   margin: 0;
+  margin-left: -15px;
+  --color: transparent;
+  --color-checked: transparent;
+}
+ion-radio:checked {
+  --color: transparent;
+  --color-checked: transparent;
 }
 
 .form-input {

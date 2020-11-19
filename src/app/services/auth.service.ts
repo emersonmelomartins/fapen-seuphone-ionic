@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalUser } from '../models/LocalUser';
-import { UserAuthLogin } from '../models/User';
+import { User, UserAuthLogin } from '../models/User';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -48,7 +48,7 @@ export class AuthService {
       "Authorization": "Bearer " + token,
     });
 
-    return this.http.get(`http://localhost:8080/api/usuarios/${login}`,
+    return this.http.get<User>(`http://localhost:8080/api/usuarios/${login}`,
      { 'headers': headers }
     );
   }

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User, UserAuthLogin } from '../models/User';
 import { StorageService } from './storage.service';
+import { RecoverPassword } from '../models/RecoverPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class UsersService {
     return this.http.post<User>(`http://localhost:8080/api/usuarios/avatarUpdate`, userInfo, { 'headers': headers });
   }
 
-  checkRecoverEmail(email) {
-    return this.http.post(`http://localhost:8080/api/esqueci-senha`, email);
+  recoverPassword(email) {
+    return this.http.post<RecoverPassword>(`http://localhost:8080/api/esqueci-senha`, email);
   }
 }
