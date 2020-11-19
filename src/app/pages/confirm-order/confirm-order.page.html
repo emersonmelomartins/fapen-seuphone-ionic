@@ -135,7 +135,7 @@
       <p style="font-size: 12px;">
         Total de Produtos: {{order.itensPedidoVenda.length}}
       </p>
-      <p style="font-size: 12px;" *ngIf="order.pedidoVenda.condicaoPagamento === 'CARTAO_CRED'">
+      <p style="font-size: 12px;" *ngIf="order.pedidoVenda.condicaoPagamento === 'CARTAO_CREDITO'">
         <span *ngIf="order.pedidoVenda.tempoContrato === '1'">
           Parcelas: {{parcelas[0].numeroParcelas}}x de R$ <b>{{parcelas[0].valorParcelas}}</b>
         </span>

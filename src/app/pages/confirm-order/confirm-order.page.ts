@@ -150,7 +150,6 @@ export class ConfirmOrderPage implements OnInit {
   }
 
   createOrder() {
-    console.log(this.order);
     this.orderService.createOrder(this.order).subscribe(resp => {
       localStorage.removeItem(STORAGE_KEYS.localCart);
       this.nav.navigateRoot("order-success");
