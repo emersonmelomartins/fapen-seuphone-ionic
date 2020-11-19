@@ -1,11 +1,11 @@
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { NavController } from "@ionic/angular";
+import { NavController, ToastController } from "@ionic/angular";
 import { UserAuthLogin } from "src/app/models/User";
 import { AuthService } from "src/app/services/auth.service";
-import { StorageService } from 'src/app/services/storage.service';
+import { StorageService } from "src/app/services/storage.service";
 import { UsersService } from "src/app/services/users.service";
 
 @Component({
@@ -32,12 +32,14 @@ export class LoginPage implements OnInit {
     private nav: NavController,
     private storage: StorageService,
     private activatedRoute: ActivatedRoute,
+    private toastController: ToastController
   ) {
     this.activatedRoute.paramMap.subscribe((param: ParamMap) => {
-      if(param.get("cadastro") === "sucesso"){
-        this.resultado = true
-      }      
-    })
+      if (param.get("cadastro") === "sucesso") {
+        this.resultado = true;
+        this.successToast();
+      }
+    });
     this.formGroup = formBuilder.group({
       username: [
         this.user.username,
@@ -53,9 +55,31 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.isLoggedIn = this.storage.getLocalUser() !== null ? true : false;
 
-    if(this.isLoggedIn) {
-      this.nav.navigateRoot('home');
+    if (this.isLoggedIn) {
+      this.nav.navigateRoot("home");
     }
+  }
+
+  async successToast() {
+    const toast = await this.toastController.create({
+      color: "success",
+      header: "Sucesso !",
+      message: "Usuário Criado com Sucesso!",
+      position: "top",
+      duration: 4000
+    });
+    toast.present();
+  }
+
+  async errorToast() {
+    const toast = await this.toastController.create({
+      color: "danger",
+      header: "Erro !",
+      message: "Ocorreu um Erro, tente novamente!",
+      position: "top",
+      duration: 4000
+    });
+    toast.present();
   }
 
   doLogin() {
@@ -63,11 +87,10 @@ export class LoginPage implements OnInit {
       (data) => {
         this.authService.successfulLogin(data.body.jwtToken);
         this.nav.navigateForward("home");
-        alert("Login efetuado com sucesso!");
         location.reload();
       },
       (error) => {
-        alert("Ocorreu um Erro!");
+        this.errorToast();
       }
     );
   }

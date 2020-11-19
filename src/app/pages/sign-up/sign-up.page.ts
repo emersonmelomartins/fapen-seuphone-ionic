@@ -1,3 +1,4 @@
+import { ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { Perfil, UserAuthLogin, FormCadastro } from './../../models/User';
 import { UsersService } from 'src/app/services/users.service';
@@ -51,6 +52,7 @@ export class SignUpPage implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UsersService,
     private navController: NavController,
+    private toastController: ToastController,
     ) {
     
     this.formGroup = formBuilder.group({
@@ -170,14 +172,24 @@ export class SignUpPage implements OnInit {
   //   return null;
   // }
 
+  async errorToast() {
+    const toast = await this.toastController.create({
+      color: "danger",
+      header: "Erro !",
+      message: "Ocorreu um Erro, tente novamente!",
+      position: "top",
+      duration: 4000
+    });
+    toast.present();
+  }
 
   handleCadastrar() {
     this.userService.createUser(this.form).subscribe(
       (data) => {
-        this.navController.navigateRoot("login");
+        this.navController.navigateRoot("login/sucesso");
       },
       (error) => {
-        console.log("Ocorreu um Erro!", error);
+        this.errorToast()
       }
     )
   }
