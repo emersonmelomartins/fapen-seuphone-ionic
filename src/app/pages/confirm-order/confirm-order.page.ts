@@ -110,7 +110,6 @@ export class ConfirmOrderPage implements OnInit {
 
   orderTest() {
     this.orderService.createOrder(this.order).subscribe(resp => {
-      alert("Pedido realizado com sucesso!");
       localStorage.removeItem(STORAGE_KEYS.localCart);
       this.nav.navigateRoot("order-success");
     },

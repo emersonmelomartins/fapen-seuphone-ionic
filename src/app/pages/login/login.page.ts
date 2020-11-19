@@ -2,7 +2,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { NavController } from "@ionic/angular";
+import { LoadingController, NavController, ToastController } from "@ionic/angular";
 import { UserAuthLogin } from "src/app/models/User";
 import { AuthService } from "src/app/services/auth.service";
 import { StorageService } from 'src/app/services/storage.service';
@@ -32,6 +32,8 @@ export class LoginPage implements OnInit {
     private nav: NavController,
     private storage: StorageService,
     private activatedRoute: ActivatedRoute,
+    private toastController: ToastController,
+    private loadingController: LoadingController
   ) {
     this.activatedRoute.paramMap.subscribe((param: ParamMap) => {
       if(param.get("cadastro") === "sucesso"){
@@ -58,16 +60,55 @@ export class LoginPage implements OnInit {
     }
   }
 
+  async showLoading(loadingId: string, loadingMessage: string = 'Aguarde...') {
+    const loading = await this.loadingController.create({
+      id: loadingId,
+      message: loadingMessage,
+      spinner: 'circles',
+      duration: 4000,
+    });
+    return await loading.present();
+}
+
+  async dismissLoader(loadingId: string) {
+      return await this.loadingController.dismiss(null, null, loadingId).then(() => console.log('loading dismissed'));
+  }
+
+  async errorToast(message) {
+    const toast = await this.toastController.create({
+      color: 'danger',
+      position: 'top',
+      header: 'ERROR!',
+      message: message,
+      duration: 3000
+    });
+    toast.present();
+  }
+
+  async successToast(message) {
+    const toast = await this.toastController.create({
+      color: 'success',
+      position: 'top',
+      header: 'SUCESSO!',
+      message: message,
+      duration: 3000
+    });
+    toast.present();
+  }
+
   doLogin() {
+    this.showLoading("login");
     this.authService.authenticate(this.user).subscribe(
       (data) => {
+        this.dismissLoader("login");
         this.authService.successfulLogin(data.body.jwtToken);
         this.nav.navigateForward("home");
-        alert("Login efetuado com sucesso!");
         location.reload();
+        this.successToast("Login efetuado com sucesso!");
       },
       (error) => {
-        alert("Ocorreu um Erro!");
+        this.dismissLoader("login");
+        this.errorToast("Ocorreu um erro!");
       }
     );
   }
