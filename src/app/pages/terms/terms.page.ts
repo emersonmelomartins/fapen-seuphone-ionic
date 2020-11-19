@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NavController } from '@ionic/angular';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-terms',
   templateUrl: './terms.page.html',
   styleUrls: ['./terms.page.scss'],
 })
-export class TermsPage implements OnInit {
+export class TermsPage {
 
   public formGroup: FormGroup;
 
@@ -23,7 +25,7 @@ export class TermsPage implements OnInit {
 
   public selectedOption: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private nav: NavController, private storage: StorageService) {
     this.formGroup = formBuilder.group({
       radioOption: [
         this.selectedOption,
@@ -33,8 +35,11 @@ export class TermsPage implements OnInit {
 
   }
 
-  ngOnInit() {
-  }
+  ionViewWillEnter() {
+    if(this.storage.getLocalUser() === null) {
+      this.nav.navigateRoot("login");
+    }
+   }
 
   radioChange(event) {
     this.selectedOption = event.target.value;

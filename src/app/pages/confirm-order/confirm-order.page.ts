@@ -70,6 +70,12 @@ export class ConfirmOrderPage implements OnInit {
     });
   }
 
+  ionViewWillEnter() {
+    if(this.storage.getLocalUser() === null) {
+      this.nav.navigateRoot("login");
+    }
+   }
+
   ionViewDidEnter() {
     let cart = this.cartService.getCart();
 
@@ -104,7 +110,6 @@ export class ConfirmOrderPage implements OnInit {
 
   orderTest() {
     this.orderService.createOrder(this.order).subscribe(resp => {
-      alert("Pedido realizado com sucesso!");
       localStorage.removeItem(STORAGE_KEYS.localCart);
       this.nav.navigateRoot("order-success");
     },

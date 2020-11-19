@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NavController } from '@ionic/angular';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -39,7 +40,7 @@ export class UserInfoPage implements OnInit {
   public selectedOption: number = 1;
 
 
-  constructor(public authService: AuthService, public storage: StorageService, public usersService: UsersService, private formBuilder: FormBuilder) {
+  constructor(public authService: AuthService, public storage: StorageService, public usersService: UsersService, private formBuilder: FormBuilder, private nav: NavController) {
 
     this.formGroup = formBuilder.group({
       radioOption: [
@@ -48,6 +49,12 @@ export class UserInfoPage implements OnInit {
       ],
     });
   }
+
+  ionViewWillEnter() {
+    if(this.storage.getLocalUser() === null) {
+      this.nav.navigateRoot("login");
+    }
+   }
 
   ngOnInit() {
     let localUser = this.storage.getLocalUser();

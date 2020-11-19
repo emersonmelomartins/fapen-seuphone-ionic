@@ -3,89 +3,42 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div classs="container">
+  <div *ngIf="order !== undefined || order !== ''">
     <ion-toolbar style="z-index: 0">
       <h2 class="title">Meus Pedidos</h2>
     </ion-toolbar>
 
-    <ion-grid>
-      <ion-row>
-        <ion-col size="3">
-          <h5
-            style="
-              font-size: 10px;
-              text-align: center;
-              font-family: 'Poppins-Bold';
-            "
-          >
-            Nº Pedido
-          </h5>
-        </ion-col>
-        <ion-col size="3">
-          <h5
-            style="
-              font-size: 10px;
-              text-align: center;
-              font-family: 'Poppins-Bold';
-            "
-          >
-            Tempo Contrato
-          </h5>
-        </ion-col>
-        <ion-col size="3">
-          <h5
-            style="
-              font-size: 10px;
-              text-align: center;
-              font-family: 'Poppins-Bold';
-            "
-          >
-            Valor
-          </h5>
-        </ion-col>
-        <ion-col size="3">
-
-        </ion-col>
-      </ion-row>
-
-      <ion-row
-      *ngFor="let order of orders; let i = index"
-      [ngClass]="{'bg-gray': i%2 === 0}"
-        style="display: flex; align-items: center; justify-content: center"
+    <ion-card class="order-card" *ngFor="let order of orders;">
+      <a
+        [routerLink]="['/order-info/' + order.idPedidoVenda]"
+        style="text-decoration: none"
       >
-        <ion-col size="3">
-          <div style="display: flex; align-items: center;">
-
-            <p
-              style="font-size: 10px; line-height: 16px; margin: 0 auto;"
-              >
-              {{order.idPedidoVenda}}
-              </p
+        <ion-card-header style="display: inline-flex; align-items: center">
+          <div>
+            <ion-card-subtitle style="font-size: 10px; color: #585858"
+              >N° {{order.idPedidoVenda}}</ion-card-subtitle
             >
-
+            <ion-card-title>
+              <span style="color: rgb(9, 180, 9); font-size: 12px"
+                >{{order.situacaoPedidoVenda}}</span
+              >
+            </ion-card-title>
+            <ion-card-subtitle style="font-size: 8px; color: #585858"
+              >Pedido efetuado em {{order.dtPedidoVenda}}</ion-card-subtitle
+            >
           </div>
-        </ion-col>
-        <ion-col size="3">
-          <p
-          style="font-size: 10px; line-height: 16px;"
-          >{{order.tempoContrato}} ano(s)</p
-        >
-        </ion-col>
-        <ion-col size="3">
-          <p style="text-align: center; font-size: 10px">
-            R$ {{order.valorFinal.toFixed(2)}}
-          </p>
-        </ion-col>
-        <ion-col size="3">
-          <p style="text-align: center; font-size: 10px">
-            <a [routerLink]="['/order-info/1']">VER PEDIDO</a>
-          </p>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    
 
-  <br />
-  <br />
+          <div>
+            <span style="font-size: 10px; color: #585858">R$ 1999,99</span>
+          </div>
+          <ion-icon
+            style="font-size: 20px; color: rgba(0, 0, 0, 0.3)"
+            name="chevron-forward-outline"
+          ></ion-icon>
+        </ion-card-header>
+      </a>
+    </ion-card>
+
+    <br />
   </div>
 </ion-content>

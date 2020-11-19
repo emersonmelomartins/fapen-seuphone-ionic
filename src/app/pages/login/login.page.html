@@ -3,12 +3,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div *ngIf="resultado === true" style="margin: 20px">
-  </div>
+  <div *ngIf="resultado === true" style="margin: 20px"></div>
   <div class="form-container">
     <form action="" [formGroup]="formGroup">
       <ion-toolbar style="z-index: 0">
-        <ion-title class="form-title">Login</ion-title>
+        <h2 class="form-title">Login</h2>
       </ion-toolbar>
       <ion-list lines="none">
         <ion-label class="form-label">Usuário</ion-label>

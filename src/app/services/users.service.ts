@@ -32,4 +32,8 @@ export class UsersService {
     
     return this.http.post<User>(`http://localhost:8080/api/usuarios/avatarUpdate`, userInfo, { 'headers': headers });
   }
+
+  checkRecoverEmail(email) {
+    return this.http.post(`http://localhost:8080/api/esqueci-senha`, email);
+  }
 }

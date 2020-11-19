@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrderService } from 'src/app/services/order.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -8,21 +9,28 @@ import { StorageService } from 'src/app/services/storage.service';
   templateUrl: './user-orders.page.html',
   styleUrls: ['./user-orders.page.scss'],
 })
-export class UserOrdersPage implements OnInit {
+export class UserOrdersPage {
 
   public orders: any;
 
-  constructor(private orderService: OrderService, private storage: StorageService) {
-    this.listOrdersByLogin();
+  constructor(private orderService: OrderService, private storage: StorageService, private nav: NavController) {
+
+    
    }
 
-  ngOnInit() {
-  }
+   ionViewWillEnter() {
+    if(this.storage.getLocalUser() === null) {
+      this.nav.navigateRoot("login");
+    } else {
+      this.listOrdersByLogin();
+    }
+   }
+
 
   listOrdersByLogin() {
     this.orderService.listOrdersByLogin(this.storage.getLocalUser().login).subscribe(resp => {
       this.orders = resp;
-    })
+    });
   }
 
 }
