@@ -1,11 +1,9 @@
 import { ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
-import { Perfil, UserAuthLogin, FormCadastro } from './../../models/User';
+import { FormCadastro } from './../../models/User';
 import { UsersService } from 'src/app/services/users.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { User, Pessoa, Endereco} from 'src/app/models/User';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.page.html',
@@ -183,10 +181,22 @@ export class SignUpPage implements OnInit {
     toast.present();
   }
 
+  async successToast(message) {
+    const toast = await this.toastController.create({
+      color: 'success',
+      position: 'top',
+      header: 'SUCESSO!',
+      message: message,
+      duration: 3000
+    });
+    toast.present();
+  }
+
   handleCadastrar() {
     this.userService.createUser(this.form).subscribe(
       (data) => {
-        this.navController.navigateRoot("login/sucesso");
+        this.successToast("Usuário Criado com Sucesso !")
+        this.navController.navigateForward("login/sucesso");
       },
       (error) => {
         this.errorToast()

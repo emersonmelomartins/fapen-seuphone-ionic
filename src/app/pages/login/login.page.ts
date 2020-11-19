@@ -35,12 +35,6 @@ export class LoginPage implements OnInit {
     private toastController: ToastController,
     private loadingController: LoadingController
   ) {
-    this.activatedRoute.paramMap.subscribe((param: ParamMap) => {
-      if (param.get("cadastro") === "sucesso") {
-        this.resultado = true;
-        this.successToast("Usuário Criado com Sucesso !");
-      }
-    });
     this.formGroup = formBuilder.group({
       username: [
         this.user.username,
@@ -105,7 +99,6 @@ export class LoginPage implements OnInit {
         this.authService.successfulLogin(data.body.jwtToken);
         this.nav.navigateForward("home");
         location.reload();
-        this.successToast("Login efetuado com sucesso!");
       },
       (error) => {
         this.dismissLoader("login");
