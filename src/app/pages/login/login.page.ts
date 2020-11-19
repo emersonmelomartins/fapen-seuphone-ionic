@@ -99,6 +99,7 @@ export class LoginPage implements OnInit {
         this.authService.successfulLogin(data.body.jwtToken);
         this.nav.navigateForward("home");
         location.reload();
+        this.successToast("Login efetuado com sucesso!");
       },
       (error) => {
         this.dismissLoader("login");
