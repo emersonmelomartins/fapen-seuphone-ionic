@@ -74,7 +74,6 @@ export class PasswordRecoverPage implements OnInit {
         this.successToast(resp.message);
       },
       (error) => {
-        console.log(error);
         this.dismissLoader('recoverPassword');
         this.errorToast(error.error.message);
       })

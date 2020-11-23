@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { SignUpPageRoutingModule } from './sign-up-routing.module';
 
 import { SignUpPage } from './sign-up.page';
+import { BrMaskerModule } from 'br-mask';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { SignUpPage } from './sign-up.page';
     SignUpPageRoutingModule,
     ComponentsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrMaskerModule
   ],
   declarations: [SignUpPage]
 })

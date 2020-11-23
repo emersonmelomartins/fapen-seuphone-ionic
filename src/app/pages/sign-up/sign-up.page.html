@@ -95,6 +95,8 @@
         <ion-input
           [(ngModel)]="form.usuario.pessoa.cpf"
           formControlName="cpf"
+          [brmasker]="{person: true}"
+          maxlength="14"
           placeholder="Digite seu CPF."
           class="form-input"
           type="text"
@@ -113,7 +115,9 @@
         <ion-input
           [(ngModel)]="form.usuario.pessoa.telefone"
           formControlName="telefone"
+          [brmasker]="{phone: true}"
           placeholder="Ex (00) 1111-2234."
+          maxlength="14"
           class="form-input"
           type="text"
         ></ion-input>
@@ -124,6 +128,8 @@
         <ion-input
           [(ngModel)]="form.usuario.pessoa.celular"
           formControlName="celular"
+          [brmasker]="{phone: true}"
+          maxlength="15"
           placeholder="Ex (00) 91111-2234."
           class="form-input"
           type="text"
@@ -200,6 +206,8 @@
           [(ngModel)]="form.usuario.pessoa.endereco.cep"
           formControlName="cep"
           placeholder="Ex. 09360-490"
+          [brmasker]="{mask: '00000-000', type:'num'}"
+          maxlength="9"
           class="form-input"
           type="text"
           (ionBlur)="getAddressByZipcode()"

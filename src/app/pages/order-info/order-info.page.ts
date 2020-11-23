@@ -27,9 +27,18 @@ export class OrderInfoPage {
     }
    }
 
+    formatDate(data) {
+    var dia  = data.split("-")[2];
+    var mes  = data.split("-")[1];
+    var ano  = data.split("-")[0];
+  return `${dia}/${mes}/${ano}`;
+  }
+
   getOrder(id) {
     this.orderService.getOrder(id).subscribe(resp => {
       this.order = resp;
+      this.order.dtEntregaVenda = this.formatDate(this.order.dtEntregaVenda)
+      this.order.dtPedidoVenda = this.formatDate(this.order.dtPedidoVenda)
     })
   }
 

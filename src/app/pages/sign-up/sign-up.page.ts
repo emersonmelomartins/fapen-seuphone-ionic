@@ -165,6 +165,7 @@ export class SignUpPage implements OnInit {
    }
 
   ngOnInit() {
+  
   }
 
   confirmPassword(formGroup: FormGroup) {
@@ -226,6 +227,11 @@ export class SignUpPage implements OnInit {
   }
 
   handleCadastrar() {
+  
+    this.form.usuario.pessoa.cpf = this.form.usuario.pessoa.cpf.replace( /\D/g , "");
+    this.form.usuario.pessoa.telefone = this.form.usuario.pessoa.telefone.replace( /\D/g , "");
+    this.form.usuario.pessoa.celular = this.form.usuario.pessoa.celular.replace( /\D/g , "");
+    this.form.usuario.pessoa.endereco.cep = this.form.usuario.pessoa.endereco.cep.replace( /\D/g , "");
     this.userService.createUser(this.form).subscribe(
       (data) => {
         this.successToast("Usuário criado com sucesso!")

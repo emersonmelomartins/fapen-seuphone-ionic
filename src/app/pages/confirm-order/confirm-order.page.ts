@@ -48,16 +48,15 @@ export class ConfirmOrderPage implements OnInit {
 
   public itens: CartItem[];
 
-  public today = new Date();
-
-  public todayPlus20 = new Date(this.today.getDate() + 20);
+  public date = new Date();
+  public newDate = this.addDays(this.date, 20);
 
   public order = {
     pedidoVenda: {
       condicaoPagamento: "",
       valorFinal: this.total(),
-      dtPedidoVenda: this.today,
-      dtEntregaVenda: this.todayPlus20,
+      dtPedidoVenda: this.date,
+      dtEntregaVenda: this.newDate,
       situacaoPedidoVenda: "AGUARDANDO",
       tempoContrato: 0,
       usuario: {}
@@ -99,6 +98,12 @@ export class ConfirmOrderPage implements OnInit {
     this.itens = cart.itens;
 
     this.cartService.checkCart(cart);
+  }
+
+   addDays(date, days) {
+    const copy = new Date(Number(date))
+    copy.setDate(date.getDate() + days)
+    return copy
   }
 
   ngOnInit() {
