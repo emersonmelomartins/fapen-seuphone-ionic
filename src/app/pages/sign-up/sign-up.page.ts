@@ -1,9 +1,10 @@
-import { ToastController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { FormCadastro } from './../../models/User';
 import { UsersService } from 'src/app/services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AddressService } from 'src/app/services/address.service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.page.html',
@@ -51,6 +52,8 @@ export class SignUpPage implements OnInit {
     private userService: UsersService,
     private navController: NavController,
     private toastController: ToastController,
+    private addressService: AddressService,
+    private loadingController: LoadingController
     ) {
     
     this.formGroup = formBuilder.group({
@@ -155,6 +158,8 @@ export class SignUpPage implements OnInit {
       telefone: this.form.usuario.pessoa.telefone,
       complemento: this.form.usuario.pessoa.endereco.complemento
       
+    }, {
+      validators: this.confirmPassword.bind(this)
     });
 
    }
@@ -162,21 +167,19 @@ export class SignUpPage implements OnInit {
   ngOnInit() {
   }
 
-  // validatePassword = (confirmPassword: FormControl): ValidatorFn => {
-    
-  //   if (this.formGroup) {
-  //     console.log(this.formGroup.get('senha').value);
-  //   }
-  //   return null;
-  // }
+  confirmPassword(formGroup: FormGroup) {
+    const { value: password } = formGroup.get('senha');
+    const { value: confirmPassword } = formGroup.get('confirmarSenha');
+    return password === confirmPassword ? null : { passwordNotMatch: true };
+  }
 
-  async errorToast() {
+  async errorToast(message) {
     const toast = await this.toastController.create({
       color: "danger",
-      header: "Erro !",
-      message: "Ocorreu um Erro, tente novamente!",
+      header: "ERRO!",
+      message: message,
       position: "top",
-      duration: 4000
+      duration: 3000
     });
     toast.present();
   }
@@ -192,14 +195,44 @@ export class SignUpPage implements OnInit {
     toast.present();
   }
 
+  async showLoading(loadingId: string, loadingMessage: string = 'Aguarde...') {
+    const loading = await this.loadingController.create({
+      id: loadingId,
+      message: loadingMessage,
+      spinner: 'circles',
+      duration: 4000,
+    });
+    return await loading.present();
+}
+
+  async dismissLoader(loadingId: string) {
+      return await this.loadingController.dismiss(null, null, loadingId).then(() => console.log('loading dismissed'));
+  }
+
+  getAddressByZipcode() {
+    this.showLoading("viacep");
+    this.addressService.getAddressByZipcode(this.form.usuario.pessoa.endereco.cep).subscribe(resp => {
+      this.dismissLoader("viacep");
+      
+      this.form.usuario.pessoa.endereco.bairro = resp.bairro;
+      this.form.usuario.pessoa.endereco.logradouro = resp.logradouro;
+      this.form.usuario.pessoa.endereco.cidade = resp.localidade;
+      this.form.usuario.pessoa.endereco.uf = resp.uf;
+    },
+    (error) => {
+      this.dismissLoader("viacep");
+      this.errorToast("Não foi encontrado o cep informado.");
+    })
+  }
+
   handleCadastrar() {
     this.userService.createUser(this.form).subscribe(
       (data) => {
-        this.successToast("Usuário Criado com Sucesso !")
+        this.successToast("Usuário criado com sucesso!")
         this.navController.navigateForward("login/sucesso");
       },
       (error) => {
-        this.errorToast()
+        this.errorToast("Ocorreu um erro!");
       }
     )
   }

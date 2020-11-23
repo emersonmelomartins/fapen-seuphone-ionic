@@ -4,8 +4,7 @@
 
 <ion-content [fullscreen]="true">
   <div class="form-container">
-    <form action=""  [formGroup]="formGroup">
-
+    <form action="" [formGroup]="formGroup">
       <ion-toolbar style="z-index: 0">
         <h3 class="form-title">Cadastro</h3>
       </ion-toolbar>
@@ -13,42 +12,45 @@
       <ion-list lines="none">
         <ion-label class="form-label">E-mail</ion-label>
         <ion-input
-        [(ngModel)]="form.usuario.email"
-        formControlName="email"
+          [(ngModel)]="form.usuario.email"
+          formControlName="email"
           placeholder="Digite seu E-mail."
           class="form-input"
           type="text"
         ></ion-input>
-        <!-- <div
+        <div
           *ngIf="!formGroup.controls.email.valid &&
             formGroup.controls.email.dirty"
           class="validator-error"
         >
           *Email obrigatório.
-        </div> -->
+        </div>
       </ion-list>
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label"
           >Nome Completo</ion-label
         >
         <ion-input
-        [(ngModel)]="form.usuario.pessoa.nome"
+          [(ngModel)]="form.usuario.pessoa.nome"
           formControlName="nome"
           placeholder="Digite seu nome completo."
           class="form-input"
           type="text"
         ></ion-input>
-        <!-- <div
-        *ngIf="!formGroup.controls.nome.valid &&
+        <div
+          *ngIf="!formGroup.controls.nome.valid &&
         formGroup.controls.nome.dirty"
           class="validator-error"
         >
           *Nome obrigatório.
-        </div> -->
+        </div>
       </ion-list>
 
       <ion-list>
-        <ion-radio-group [(ngModel)]="form.usuario.pessoa.sexo" formControlName="sexo">
+        <ion-radio-group
+          [(ngModel)]="form.usuario.pessoa.sexo"
+          formControlName="sexo"
+        >
           <ion-label class="form-label">Sexo</ion-label>
 
           <ion-item>
@@ -79,37 +81,37 @@
           class="form-input"
           type="date"
         ></ion-input>
-        <!-- <div
+        <div
           *ngIf="!formGroup.controls.dtNascimento.valid &&
         formGroup.controls.dtNascimento.dirty"
           class="validator-error"
         >
           *Data de Nascimento obrigatório.
-        </div> -->
+        </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">CPF</ion-label>
         <ion-input
-        [(ngModel)]="form.usuario.pessoa.cpf"
+          [(ngModel)]="form.usuario.pessoa.cpf"
           formControlName="cpf"
           placeholder="Digite seu CPF."
           class="form-input"
           type="text"
         ></ion-input>
-        <!-- <div
+        <div
           *ngIf="!formGroup.controls.cpf.valid &&
         formGroup.controls.cpf.dirty"
           class="validator-error"
         >
           *CPF obrigatório.
-        </div> -->
+        </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Telefone</ion-label>
         <ion-input
-        [(ngModel)]="form.usuario.pessoa.telefone"
+          [(ngModel)]="form.usuario.pessoa.telefone"
           formControlName="telefone"
           placeholder="Ex (00) 1111-2234."
           class="form-input"
@@ -120,8 +122,8 @@
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Celular</ion-label>
         <ion-input
-        [(ngModel)]="form.usuario.pessoa.celular"
-          formControlName="celular" 
+          [(ngModel)]="form.usuario.pessoa.celular"
+          formControlName="celular"
           placeholder="Ex (00) 91111-2234."
           class="form-input"
           type="text"
@@ -131,37 +133,37 @@
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Login</ion-label>
         <ion-input
-        [(ngModel)]="form.usuario.login"
+          [(ngModel)]="form.usuario.login"
           formControlName="login"
           placeholder="Informe seu Login."
           class="form-input"
           type="text"
         ></ion-input>
-        <!-- <div
+        <div
           *ngIf="!formGroup.controls.login.valid &&
         formGroup.controls.login.dirty"
           class="validator-error"
         >
           *Login obrigatório.
-        </div> -->
+        </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Senha</ion-label>
         <ion-input
-        [(ngModel)]="form.usuario.senha"
+          [(ngModel)]="form.usuario.senha"
           formControlName="senha"
           placeholder="Digite sua Senha."
           class="form-input"
           type="password"
         ></ion-input>
-        <!-- <div
+        <div
           *ngIf="!formGroup.controls.senha.valid &&
         formGroup.controls.senha.dirty"
           class="validator-error"
         >
           *Senha obrigatório.
-        </div> -->
+        </div>
       </ion-list>
 
       <ion-list lines="none">
@@ -169,136 +171,168 @@
           >Confirme a Senha</ion-label
         >
         <ion-input
-        [(ngModel)]="form.confirmaSenha"
+          [(ngModel)]="form.confirmaSenha"
           formControlName="confirmarSenha"
           placeholder="Confirme sua Senha."
           class="form-input"
           type="password"
         ></ion-input>
-        <!-- <div
-          *ngIf="!formGroup.controls.confirmaSenha.valid  &&
-        formGroup.controls.confirmaSenha.dirty"
+        <div
+          *ngIf="!formGroup.controls.confirmarSenha.valid &&
+        formGroup.controls.confirmarSenha.dirty"
           class="validator-error"
         >
-          *É obrigatório confirmar a Senha !.
-        </div> -->
+          *É necessário informar novamente sua senha.
+        </div>
+        <div
+          *ngIf="!formGroup.get('confirmarSenha').errors && formGroup.hasError('passwordNotMatch') && (formGroup.get('confirmarSenha').dirty || formGroup.get('confirmarSenha').touched)"
+          class="validator-error"
+        >
+          *As senhas precisam ser iguais.
+        </div>
       </ion-list>
-      
 
-
-          <h3 class="form-title">Endereço</h3> 
+      <h3 class="form-title">Endereço</h3>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">CEP</ion-label>
         <ion-input
-        [(ngModel)]="form.usuario.pessoa.endereco.cep"
+          [(ngModel)]="form.usuario.pessoa.endereco.cep"
           formControlName="cep"
           placeholder="Ex. 09360-490"
           class="form-input"
           type="text"
+          (ionBlur)="getAddressByZipcode()"
         ></ion-input>
-        <!-- <div
-        *ngIf="!formGroup.controls.cep.valid &&
+        <div
+          *ngIf="!formGroup.controls.cep.valid &&
       formGroup.controls.cep.dirty"
-        class="validator-error"
-      >
-        *CEP obrigatório.
-      </div> -->
+          class="validator-error"
+        >
+          *CEP obrigatório.
+        </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Logradouro</ion-label>
         <ion-input
-        [(ngModel)]="form.usuario.pessoa.endereco.logradouro"
+          [(ngModel)]="form.usuario.pessoa.endereco.logradouro"
           formControlName="logradouro"
           placeholder="Ex. Av. Caetano Scila"
           class="form-input"
           type="text"
         ></ion-input>
-        <!-- <div
+        <div
         *ngIf="!formGroup.controls.logradouro.valid &&
       formGroup.controls.logradouro.dirty"
         class="validator-error"
       >
         *Logradouro obrigatório.
-      </div> -->
+      </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Número</ion-label>
         <ion-input
-        [(ngModel)]="form.usuario.pessoa.endereco.numero"
+          [(ngModel)]="form.usuario.pessoa.endereco.numero"
           formControlName="numero"
           placeholder="Ex. 200"
           class="form-input"
           type="Number"
         ></ion-input>
-        <!-- <div
+        <div
         *ngIf="!formGroup.controls.numero.valid &&
       formGroup.controls.numero.dirty"
         class="validator-error"
       >
         *Número obrigatório.
-      </div> -->
+      </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Bairro</ion-label>
         <ion-input
-        [(ngModel)]="form.usuario.pessoa.endereco.bairro"
+          [(ngModel)]="form.usuario.pessoa.endereco.bairro"
           formControlName="bairro"
           placeholder="Ex. Parque Marajoara"
           class="form-input"
           type="text"
         ></ion-input>
-        <!-- <div
+        <div
         *ngIf="!formGroup.controls.bairro.valid &&
       formGroup.controls.bairro.dirty"
         class="validator-error"
       >
         *Bairro obrigatório.
-      </div> -->
+      </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Cidade</ion-label>
         <ion-input
-        [(ngModel)]="form.usuario.pessoa.endereco.cidade"
+          [(ngModel)]="form.usuario.pessoa.endereco.cidade"
           formControlName="cidade"
           placeholder="Ex. Santo André"
           class="form-input"
           type="text"
         ></ion-input>
-        <!-- <div
+        <div
         *ngIf="!formGroup.controls.cidade.valid &&
       formGroup.controls.cidade.dirty"
         class="validator-error"
       >
         *Cidade obrigatório.
-      </div> -->
+      </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">UF</ion-label>
-        <ion-select [(ngModel)]="form.usuario.pessoa.endereco.uf" formControlName="uf" placeholder="Selecione seu Estado">
+        <ion-select
+          [(ngModel)]="form.usuario.pessoa.endereco.uf"
+          formControlName="uf"
+          placeholder="Selecione seu Estado"
+        >
+          <ion-select-option value="AC">Acre</ion-select-option>
+          <ion-select-option value="AL">Alagoas</ion-select-option>
+          <ion-select-option value="AP">Amapá</ion-select-option>
+          <ion-select-option value="AM">Amazonas</ion-select-option>
+          <ion-select-option value="BA">Bahia</ion-select-option>
+          <ion-select-option value="CE">Ceará</ion-select-option>
+          <ion-select-option value="DF">Distrito Federal</ion-select-option>
+          <ion-select-option value="ES">Espírito Santo</ion-select-option>
+          <ion-select-option value="GO">Goiás</ion-select-option>
+          <ion-select-option value="MA">Maranhão</ion-select-option>
+          <ion-select-option value="MT">Mato Grosso</ion-select-option>
+          <ion-select-option value="MS">Mato Grosso do Sul</ion-select-option>
+          <ion-select-option value="MG">Minas Gerais</ion-select-option>
+          <ion-select-option value="PA">Pará</ion-select-option>
+          <ion-select-option value="PB">Paraíba</ion-select-option>
+          <ion-select-option value="PR">Paraná</ion-select-option>
+          <ion-select-option value="PE">Pernambuco</ion-select-option>
+          <ion-select-option value="PI">Piauí</ion-select-option>
+          <ion-select-option value="RJ">Rio de Janeiro</ion-select-option>
+          <ion-select-option value="RN">Rio Grande do Norte</ion-select-option>
+          <ion-select-option value="RS">Rio Grande do Sul</ion-select-option>
+          <ion-select-option value="RO">Rondônia</ion-select-option>
+          <ion-select-option value="RR">Roraima</ion-select-option>
+          <ion-select-option value="SC">Santa Catarina</ion-select-option>
           <ion-select-option value="SP">São Paulo</ion-select-option>
-          <ion-select-option value="MG"
-            >Minas Gerais</ion-select-option
-          >
+          <ion-select-option value="SE">Sergipe</ion-select-option>
+          <ion-select-option value="TO">Tocantins</ion-select-option>
         </ion-select>
-        <!-- <div
-        *ngIf="!formGroup.controls.uf.valid &&
+        <div
+          *ngIf="!formGroup.controls.uf.valid &&
       formGroup.controls.uf.dirty"
-        class="validator-error"
-      >
-        *UF obrigatório.
-      </div> -->
+          class="validator-error"
+        >
+          *UF obrigatório.
+        </div>
       </ion-list>
 
       <ion-list lines="none">
         <ion-label position="stacked" class="form-label">Complemento</ion-label>
         <ion-input
-        [(ngModel)]="form.usuario.pessoa.endereco.complemento"
+          [(ngModel)]="form.usuario.pessoa.endereco.complemento"
           formControlName="complemento"
           placeholder="Ex. Ao lado do mercado"
           class="form-input"
@@ -306,7 +340,14 @@
         ></ion-input>
       </ion-list>
 
-      <ion-button [disabled]="!formGroup.valid" (click)="handleCadastrar()" expand="block" color="success"> Cadastrar </ion-button>
+      <ion-button
+        [disabled]="!formGroup.valid"
+        (click)="handleCadastrar()"
+        expand="block"
+        color="success"
+      >
+        Cadastrar
+      </ion-button>
     </form>
   </div>
 </ion-content>
