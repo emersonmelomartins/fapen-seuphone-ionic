@@ -8,6 +8,7 @@ import { UserInfoPageRoutingModule } from './user-info-routing.module';
 
 import { UserInfoPage } from './user-info.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { BrMaskerModule } from 'br-mask';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     IonicModule,
     UserInfoPageRoutingModule,
     ComponentsModule,
+    BrMaskerModule
   ],
   declarations: [UserInfoPage]
 })

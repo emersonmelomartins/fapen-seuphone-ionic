@@ -227,18 +227,20 @@ export class SignUpPage implements OnInit {
   }
 
   handleCadastrar() {
-  
+    this.showLoading("sign-up");
     this.form.usuario.pessoa.cpf = this.form.usuario.pessoa.cpf.replace( /\D/g , "");
     this.form.usuario.pessoa.telefone = this.form.usuario.pessoa.telefone.replace( /\D/g , "");
     this.form.usuario.pessoa.celular = this.form.usuario.pessoa.celular.replace( /\D/g , "");
     this.form.usuario.pessoa.endereco.cep = this.form.usuario.pessoa.endereco.cep.replace( /\D/g , "");
     this.userService.createUser(this.form).subscribe(
       (data) => {
+        this.dismissLoader("sign-up");
         this.successToast("Usuário criado com sucesso!")
         this.navController.navigateForward("login/sucesso");
       },
       (error) => {
-        this.errorToast("Ocorreu um erro!");
+        this.dismissLoader("sign-up");
+        this.errorToast("Ocorreu um erro inesperado!");
       }
     )
   }

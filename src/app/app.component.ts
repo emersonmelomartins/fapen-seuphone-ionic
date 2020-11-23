@@ -18,6 +18,7 @@ export class AppComponent {
   isLoggedIn: boolean;
   userLogin: string;
   userInfo: any;
+  userAvatar: string;
 
   constructor(
     private platform: Platform,
@@ -37,6 +38,7 @@ export class AppComponent {
 
       this.authService.findByLogin(this.userLogin).subscribe(resp => {
         this.userInfo = resp;
+        this.userAvatar = resp.caminhoFoto;
       })
     }
   }

@@ -10,8 +10,26 @@
 
     <ion-avatar style="text-align: center; margin: 0 auto">
       <img
-        *ngIf="userInfo !== undefined && userInfo !== '' && userInfo !== null"
+      *ngIf="
+      userInfo !== undefined &&
+      userInfo !== '' &&
+      userInfo !== null &&
+      userAvatar !== undefined &&
+      userAvatar !== null &&
+      userAvatar !== ''
+    "
         src="{{userInfo.fotoEmString}}"
+      />
+      <img
+      *ngIf="
+      (userInfo !== undefined &&
+        userInfo !== '' &&
+        userInfo !== null &&
+        userAvatar === null) ||
+      userAvatar === '' ||
+      userAvatar === undefined
+    "
+        src="../assets/default_avatar.png"
       />
     </ion-avatar>
     <br />
@@ -157,12 +175,23 @@
     style="margin: auto 20px"
   >
     <ion-list lines="none">
+      <ion-label class="form-label">CEP</ion-label>
+      <ion-input
+        class="form-input"
+        type="text"
+        [(ngModel)]="address.cep"
+        (ionBlur)="getAddressByZipcode()"
+        [brmasker]="{mask: '00000-000', type:'num'}"
+        maxlength="9"
+      ></ion-input>
+
+      <br />
+
       <ion-label class="form-label">Logradouro</ion-label>
       <ion-input
         class="form-input"
         type="text"
-        value="{{userInfo.pessoa.endereco.logradouro}}"
-        disabled
+        [(ngModel)]="address.logradouro"
       ></ion-input>
 
       <br />
@@ -171,8 +200,7 @@
       <ion-input
         class="form-input"
         type="text"
-        value="{{userInfo.pessoa.endereco.bairro}}"
-        disabled
+        [(ngModel)]="address.bairro"
       ></ion-input>
 
       <br />
@@ -181,8 +209,7 @@
       <ion-input
         class="form-input"
         type="text"
-        value="{{userInfo.pessoa.endereco.cidade}}"
-        disabled
+        [(ngModel)]="address.cidade"
       ></ion-input>
 
       <br />
@@ -191,35 +218,37 @@
       <ion-input
         class="form-input"
         type="text"
-        value="{{userInfo.pessoa.endereco.uf}}"
-        disabled
+        [(ngModel)]="address.uf"
       ></ion-input>
 
       <br />
 
-
-      <ion-label class="form-label">CEP</ion-label>
+      <ion-label class="form-label">Número</ion-label>
       <ion-input
         class="form-input"
         type="text"
-        value="{{userInfo.pessoa.endereco.cep}}"
-        disabled
+        [(ngModel)]="address.numero"
       ></ion-input>
 
       <br />
-
 
       <ion-label class="form-label">Complemento</ion-label>
       <ion-input
         class="form-input"
         type="text"
-        value="{{userInfo.pessoa.endereco.complemento}}"
-        disabled
+        [(ngModel)]="address.complemento"
       ></ion-input>
 
       <br />
 
-
+      <ion-button
+        (click)="updateAddress()"
+        class="btn"
+        expand="block"
+        color="success"
+      >
+        Atualizar Endereço
+      </ion-button>
     </ion-list>
   </div>
 
