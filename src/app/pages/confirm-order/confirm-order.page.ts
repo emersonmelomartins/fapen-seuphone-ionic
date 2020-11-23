@@ -83,7 +83,16 @@ export class ConfirmOrderPage implements OnInit {
         this.order.pedidoVenda.tempoContrato,
         Validators.compose([Validators.required]),
       ],
-    });
+    },
+    {
+      validators: this.checkContract.bind(this),
+    }
+    );
+  }
+
+  checkContract(formGroup: FormGroup) {
+    const { value: contract } = formGroup.get('contratoSelect');
+    return contract > 0 ? null : { contractNotSelected: true };
   }
 
   ionViewWillEnter() {

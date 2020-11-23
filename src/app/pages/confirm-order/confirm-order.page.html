@@ -65,7 +65,7 @@
           >
         </ion-list-header>
 
-        <ion-select [(ngModel)]="contratoSelect" formControlName="contratoSelect" (ionChange)="tempoContratoSelectChange($event)" value="{{order.tempo_contrato}}" okText="Confirmar" cancelText="Cancelar" placeholder="Escolha a duração do contrato...">
+        <ion-select [(ngModel)]="contratoSelect" formControlName="contratoSelect" (ionChange)="tempoContratoSelectChange($event)" value="{{order.tempo_contrato}}" okText="Confirmar" cancelText="Cancelar" placeholder="Escolha a duração do contrato..." class="form-select">
           <ion-select-option value="1">1 ano</ion-select-option>
           <ion-select-option value="2">2 anos</ion-select-option>
         </ion-select>
@@ -90,6 +90,12 @@
   
         </ion-radio-group>
       </ion-list>
+      <div
+      *ngIf="!formGroup.get('contratoSelect').errors && formGroup.hasError('contractNotSelected')"
+      class="validator-error"
+    >
+      *As senhas precisam ser iguais.
+    </div>
 
       <div *ngIf="order.pedidoVenda.condicaoPagamento === 'CARTAO_CREDITO'" style="margin: auto 20px;">
         <ion-list lines="none">
@@ -154,7 +160,7 @@
     </div>
 
 
-    <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="success" (click)="createOrder()">Finalizar Compra</ion-button>
+    <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="success" (click)="createOrder()" [disabled]="!formGroup.valid">Finalizar Compra</ion-button>
     <ion-button class="btn" style="margin: 10px" size="large" expand="block" color="danger" (click)="goBack()">Voltar</ion-button>
   </div>
 </ion-content>

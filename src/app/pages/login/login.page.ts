@@ -102,7 +102,7 @@ export class LoginPage implements OnInit {
       },
       (error) => {
         this.dismissLoader("login");
-        this.errorToast("Ocorreu um erro!");
+        this.errorToast("Usuário ou senha inválido!");
       }
     );
   }
