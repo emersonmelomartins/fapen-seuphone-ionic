@@ -42,7 +42,7 @@
           </h5>
         </ion-col>
         <ion-col size="4">
-          <p class="conteudo-preco-tabela ">R$ {{item.produto.valor.toFixed(2)}}</p>
+          <p class="conteudo-preco-tabela ">R$ {{item.produto.valor.toLocaleString()}}</p>
         </ion-col>
       </ion-row>
 
@@ -141,7 +141,7 @@
     <div style="margin-left: 15px;">
       <ion-label style="text-align: left; font-weight: bold;">Resumo do Pedido</ion-label>
       <p style="font-size: 12px;">
-        Total de Produtos: {{order.itensPedidoVenda.length}}
+        Total de Modelos: {{order.itensPedidoVenda.length}}
       </p>
       <p style="font-size: 12px;" *ngIf="order.pedidoVenda.condicaoPagamento === 'CARTAO_CREDITO'">
         <span *ngIf="order.pedidoVenda.tempoContrato === '1'">
@@ -155,7 +155,7 @@
 
       </p>
       <p style="font-size: 12px;">
-        Total: <b>R$ {{total().toFixed(2)}}</b>
+        Total: <b>R$ {{total().toLocaleString()}}</b>
       </p>
 
 

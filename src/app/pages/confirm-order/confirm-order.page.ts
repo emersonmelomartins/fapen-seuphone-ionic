@@ -32,11 +32,11 @@ export class ConfirmOrderPage implements OnInit {
   public parcelas = [
     {
       numeroParcelas: 12,
-      valorParcelas: (this.total()/12).toFixed(2),
+      valorParcelas: (this.total()/12).toLocaleString(),
     },
     {
       numeroParcelas: 24,
-      valorParcelas: (this.total()/24).toFixed(2),
+      valorParcelas: (this.total()/24).toLocaleString(),
     }
   ]
 

@@ -19,7 +19,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <img src="{{product.fotoEmString}}" width="80%" />
+          <img src="{{product.fotoEmString}}" />
         </ion-col>
         <ion-col>
           <div>
@@ -29,8 +29,8 @@
             <p class="product-card-text">{{product.descricao}}</p>
             <p class="product-card-text">
               <sup>R$</sup>
-              <span style="color: #2e4ea1; font-size: 24px">
-                {{product.valor.toFixed(2)}}</span
+              <span style="color: #2e4ea1; font-size: 18px">
+                {{product.valor.toLocaleString()}}</span
               >
             </p>
           </div>
